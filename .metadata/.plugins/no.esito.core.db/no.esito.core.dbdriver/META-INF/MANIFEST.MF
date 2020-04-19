@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DbDriver
+Bundle-SymbolicName: no.esito.core.dbdriver
+Bundle-Version: 2.8.1.v201806291258
+Bundle-Activator: no.esito.core.dbdriver.DBDriverPlugin
+Bundle-Vendor: Esito AS
+Require-Bundle: org.eclipse.core.runtime,no.esito.core.db,org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,commons-pool2-2.3.jar,commons-dbcp2-2.1.1.jar,lib/derbyclient-10.13.1.1.jar,lib/derbynet-10.13.1.1.jar,lib/derby-10.13.1.1.jar,lib/mysql-connector-java-5.1.44-bin.jar
+Import-Package: no.esito.core.db,
+ no.esito.core.db.holders,
+ no.esito.core.db.model,
+ no.esito.core.db.model.connection,
+ no.esito.core.db.model.driver,
+ no.esito.core.model,
+ no.esito.core.model.meta,
+ no.esito.core.model.util
