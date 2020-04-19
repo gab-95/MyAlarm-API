@@ -1,5 +1,0 @@
-package it.myalert.adapterConverter;
-
-public class UserAdapter implements Converter<ToDTO, FromDTO> {
-
-}
