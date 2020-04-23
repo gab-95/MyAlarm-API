@@ -8,16 +8,24 @@ import javax.validation.constraints.NotEmpty;
 
 public class UserDTO {
 	
-	int idUser;
-	String Name;
-	String Surname;
+	@NotEmpty
+	private int idUser;
+	@NotEmpty
+	private String name;
+	@NotEmpty
+	private String surname;
 	@Email @NotEmpty 
-	String Email;
-	String Password;
-	String City;
-	String Address;
-	Date BirthDate;
-	String Sex;
+	private String email;
+	@NotEmpty
+	private Date birthDate;
+	@NotEmpty
+	private String sex;
+	@NotEmpty
+	private String address;
+	@NotEmpty
+	private String city;
+	@NotEmpty
+	private String country;
 	
 	
 	public int getIdUser() {
@@ -27,53 +35,57 @@ public class UserDTO {
 		this.idUser = idUser;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public String getSurname() {
-		return Surname;
+		return surname;
 	}
 	public void setSurname(String surname) {
-		Surname = surname;
+		this.surname = surname;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
-	public String getCity() {
-		return City;
-	}
-	public void setCity(String city) {
-		City = city;
-	}
-	public String getAddress() {
-		return Address;
-	}
-	public void setAddress(String address) {
-		Address = address;
-	}
+	
 	public Date getBirthDate() {
-		return BirthDate;
+		return birthDate;
 	}
 	public void setBirthDate(Date birthDate) {
-		BirthDate = birthDate;
+		this.birthDate = birthDate;
 	}
 	public String getSex() {
-		return Sex;
+		return sex;
 	}
 	public void setSex(String sex) {
-		Sex = sex;
+		this.sex = sex;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+	
+	
 	
 
 }

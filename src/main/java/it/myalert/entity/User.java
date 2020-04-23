@@ -6,62 +6,53 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
-@Entity(name="user")
+@Entity
+@Table(name="user", indexes={@Index(name="user_Email_IX", columnList="Email", unique=true)})
 public class User implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idUser";
 
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
-
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
     private int idUser;
     @Column(name="Name", nullable=false, length=45)
     private String name;
     @Column(name="Surname", nullable=false, length=45)
     private String surname;
-    @Column(name="Email", nullable=false, length=70)
+    @Column(name="Email", unique=true, nullable=false, length=70)
     private String email;
-    @Column(name="Password", nullable=false, length=45)
-    private String password;
-    @Column(name="BirthDate")
+    @Column(name="BirthDate", nullable=false)
     private Timestamp birthDate;
-    @Column(name="Sex", length=1)
+    @Column(name="Sex", nullable=false, length=1)
     private String sex;
+    @Column(name="Adress", nullable=false, length=70)
+    private String adress;
     @Column(name="City", nullable=false, length=45)
     private String city;
-    @Column(name="Address", nullable=false, length=45)
-    private String address;
+    @Column(name="Country", nullable=false, length=45)
+    private String country;
+    @OneToMany(mappedBy="user")
+    private Set<Agent> agent;
+    @OneToMany(mappedBy="user")
+    private Set<Citizen> citizen;
+    @OneToMany(mappedBy="user")
+    private Set<Image> image;
+    @OneToMany(mappedBy="user")
+    private Set<Manager> manager;
 
     /** Default constructor. */
     public User() {
@@ -141,24 +132,6 @@ public class User implements Serializable {
     }
 
     /**
-     * Access method for password.
-     *
-     * @return the current value of password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Setter method for password.
-     *
-     * @param aPassword the new value for password
-     */
-    public void setPassword(String aPassword) {
-        password = aPassword;
-    }
-
-    /**
      * Access method for birthDate.
      *
      * @return the current value of birthDate
@@ -195,6 +168,24 @@ public class User implements Serializable {
     }
 
     /**
+     * Access method for adress.
+     *
+     * @return the current value of adress
+     */
+    public String getAdress() {
+        return adress;
+    }
+
+    /**
+     * Setter method for adress.
+     *
+     * @param aAdress the new value for adress
+     */
+    public void setAdress(String aAdress) {
+        adress = aAdress;
+    }
+
+    /**
      * Access method for city.
      *
      * @return the current value of city
@@ -213,21 +204,93 @@ public class User implements Serializable {
     }
 
     /**
-     * Access method for address.
+     * Access method for country.
      *
-     * @return the current value of address
+     * @return the current value of country
      */
-    public String getAddress() {
-        return address;
+    public String getCountry() {
+        return country;
     }
 
     /**
-     * Setter method for address.
+     * Setter method for country.
      *
-     * @param aAddress the new value for address
+     * @param aCountry the new value for country
      */
-    public void setAddress(String aAddress) {
-        address = aAddress;
+    public void setCountry(String aCountry) {
+        country = aCountry;
+    }
+
+    /**
+     * Access method for agent.
+     *
+     * @return the current value of agent
+     */
+    public Set<Agent> getAgent() {
+        return agent;
+    }
+
+    /**
+     * Setter method for agent.
+     *
+     * @param aAgent the new value for agent
+     */
+    public void setAgent(Set<Agent> aAgent) {
+        agent = aAgent;
+    }
+
+    /**
+     * Access method for citizen.
+     *
+     * @return the current value of citizen
+     */
+    public Set<Citizen> getCitizen() {
+        return citizen;
+    }
+
+    /**
+     * Setter method for citizen.
+     *
+     * @param aCitizen the new value for citizen
+     */
+    public void setCitizen(Set<Citizen> aCitizen) {
+        citizen = aCitizen;
+    }
+
+    /**
+     * Access method for image.
+     *
+     * @return the current value of image
+     */
+    public Set<Image> getImage() {
+        return image;
+    }
+
+    /**
+     * Setter method for image.
+     *
+     * @param aImage the new value for image
+     */
+    public void setImage(Set<Image> aImage) {
+        image = aImage;
+    }
+
+    /**
+     * Access method for manager.
+     *
+     * @return the current value of manager
+     */
+    public Set<Manager> getManager() {
+        return manager;
+    }
+
+    /**
+     * Setter method for manager.
+     *
+     * @param aManager the new value for manager
+     */
+    public void setManager(Set<Manager> aManager) {
+        manager = aManager;
     }
 
     /**
