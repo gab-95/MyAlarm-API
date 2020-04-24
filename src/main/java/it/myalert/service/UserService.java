@@ -9,5 +9,6 @@ import it.myalert.entity.User;
 public interface UserService extends Converter<UserDTO, User> {
 	
 	public List<User> getAll();
+	public User addUser(User user);
 	
 }

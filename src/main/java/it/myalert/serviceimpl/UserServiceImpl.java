@@ -27,6 +27,13 @@ public class UserServiceImpl extends UserAdapter implements UserService  {
 		return users;
 	}
 
+
+	@Override
+	public User addUser(User user) {
+		
+		return this.userRepository.save(user);
+	}
+
 	
 
 }

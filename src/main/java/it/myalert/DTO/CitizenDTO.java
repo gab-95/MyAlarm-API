@@ -2,17 +2,17 @@ package it.myalert.DTO;
 
 public class CitizenDTO {
 
-	private UserDTO userDTO;
+	private UserDTO user;
 	private int idCitizen;
 	private String lat;
 	private String lon;
 	
 	
 	public UserDTO getUserDTO() {
-		return userDTO;
+		return user;
 	}
 	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+		this.user = userDTO;
 	}
 	public int getIdCitizen() {
 		return idCitizen;

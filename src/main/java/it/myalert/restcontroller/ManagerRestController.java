@@ -55,7 +55,6 @@ public class ManagerRestController {
 		
 	}
 	
-	@PostMapping(value="/addAgent", consumes = Media>Type.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public 
+
 
 }

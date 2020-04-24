@@ -5,14 +5,14 @@ import java.util.Date;
 public class AgentDTO {
 
 	private int idAgent;
-	private UserDTO userDTO;
+	private UserDTO user;
 	private String department;
 	private String department_Code;
 	private String lat;
 	private String lon;
 	private Date startDate_task;
 	private Date endDate_task;
-	private ManagerDTO managerDTO;
+	private ManagerDTO manager;
 	
 	
 	public String getLat() {
@@ -46,10 +46,10 @@ public class AgentDTO {
 		this.idAgent = idAgent;
 	}
 	public UserDTO getUserDTO() {
-		return userDTO;
+		return user;
 	}
 	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+		this.user = userDTO;
 	}
 	public String getDepartment() {
 		return department;
@@ -64,10 +64,10 @@ public class AgentDTO {
 		this.department_Code = department_Code;
 	}
 	public ManagerDTO getManagerDTO() {
-		return managerDTO;
+		return manager;
 	}
 	public void setManagerDTO(ManagerDTO managerDTO) {
-		this.managerDTO = managerDTO;
+		this.manager = managerDTO;
 	}
 	
 	

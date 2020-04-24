@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Agent implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="idManager_FK", nullable=false)
     private Manager manager;
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, cascade = {CascadeType.ALL})
     @JoinColumn(name="idUser_FK", nullable=false)
     private User user;
     @OneToMany(mappedBy="agent")

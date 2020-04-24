@@ -36,7 +36,7 @@ public class UserAdapter implements Converter<UserDTO, User> {
 		user.setSex(userDTO.getSex());
 		user.setAdress(userDTO.getSex());
 		user.setCity(userDTO.getCity());
-		user.setCountry(user.getCountry());
+		user.setCountry(userDTO.getCountry());
 		return user;
 	}
 

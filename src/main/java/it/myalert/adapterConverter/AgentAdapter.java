@@ -6,7 +6,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.myalert.DTO.AgentDTO;
-import it.myalert.DTO.ManagerDTO;
 import it.myalert.entity.Agent;
 
 public class AgentAdapter implements Converter<AgentDTO, Agent>{
