@@ -1,0 +1,22 @@
+package it.myalert.adapterConverter;
+
+import it.myalert.DTO.ManagerDTO;
+import it.myalert.entity.Manager;
+
+public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
+
+	@Override
+	public ManagerDTO convertToDTO(Manager manager) {
+		
+		ManagerDTO managerDTO = new ManagerDTO();
+		managerDTO.setIdManager(manager.get);
+		return null;
+	}
+
+	@Override
+	public Manager convertToEntity(ManagerDTO todto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

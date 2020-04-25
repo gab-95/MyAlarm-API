@@ -1,0 +1,36 @@
+package it.myalert.serviceimpl;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
+import it.myalert.DTO.ManagerDTO;
+import it.myalert.adapterConverter.ManagerAdapter;
+import it.myalert.entity.Manager;
+import it.myalert.entity.User;
+import it.myalert.repository.ManagerRepository;
+import it.myalert.repository.UserRepository;
+import it.myalert.service.ManagerService;
+
+@Service
+@Transactional
+public class ManagerServiceImpl extends ManagerAdapter implements ManagerService {
+
+	@Autowired
+	private ManagerRepository managerRepository;
+
+	
+	@Override
+	public List<Manager> getAll() {
+		List<Manager> manager = this.managerRepository.findAll();
+		return manager;
+	}
+
+
+}

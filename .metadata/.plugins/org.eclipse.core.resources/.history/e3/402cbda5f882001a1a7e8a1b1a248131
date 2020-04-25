@@ -1,0 +1,82 @@
+// Generated with g9.
+
+package it.myalert.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Version;
+
+@Entity(name="alarm")
+@IdClass(AlarmId.class)
+public class Alarm implements Serializable {
+
+    
+    @Column(name="AlarmDate")
+    private Timestamp alarmDate;
+
+    /** Default constructor. */
+    public Alarm() {
+        super();
+    }
+
+    /**
+     * Access method for alarmDate.
+     *
+     * @return the current value of alarmDate
+     */
+    public Timestamp getAlarmDate() {
+        return alarmDate;
+    }
+
+    /**
+     * Setter method for alarmDate.
+     *
+     * @param aAlarmDate the new value for alarmDate
+     */
+    public void setAlarmDate(Timestamp aAlarmDate) {
+        alarmDate = aAlarmDate;
+    }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alarmDate == null) ? 0 : alarmDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alarm other = (Alarm) obj;
+		if (alarmDate == null) {
+			if (other.alarmDate != null)
+				return false;
+		} else if (!alarmDate.equals(other.alarmDate))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Alarm [alarmDate=" + alarmDate + ", getAlarmDate()=" + getAlarmDate() + ", hashCode()=" + hashCode()
+				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+	}
+
+    
+
+}

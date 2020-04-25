@@ -1,0 +1,5 @@
+package it.myalert.entity;
+
+public class Manager {
+
+}

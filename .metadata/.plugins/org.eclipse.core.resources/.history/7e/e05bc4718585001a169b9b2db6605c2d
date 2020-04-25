@@ -1,0 +1,5 @@
+package it.myalert.service;
+
+public interface AgentService {
+
+}

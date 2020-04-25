@@ -1,0 +1,5 @@
+package it.myalert.DTO;
+
+public class UserDTO {
+
+}

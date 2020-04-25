@@ -1,0 +1,29 @@
+package it.myalert.adapterConverter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import it.myalert.DTO.ManagerDTO;
+import it.myalert.entity.Manager;
+
+public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
+
+	@Autowired
+	UserAdapter convertUser;
+	
+	@Override
+	public ManagerDTO convertToDTO(Manager manager) {
+		
+		ManagerDTO managerDTO = new ManagerDTO();
+		managerDTO.setUser(convertUser.convertToDTO(manager.getUser()));
+		managerDTO.setStartDate_task(manager.getStartDateTask());
+		managerDTO.setEndDate_task(manager.getEndDateTask());
+		return managerDTO;
+	}
+
+	@Override
+	public Manager convertToEntity(ManagerDTO todto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

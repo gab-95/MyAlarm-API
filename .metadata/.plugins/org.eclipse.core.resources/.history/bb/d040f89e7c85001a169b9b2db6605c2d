@@ -1,0 +1,12 @@
+package it.myalert.DTO;
+
+public class AgentDTO {
+
+	private int idAgent;
+	private UserDTO userDTO;
+	private String department;
+	private String department_Code;
+	private ManagerDTO managerDTO;
+	
+	
+}

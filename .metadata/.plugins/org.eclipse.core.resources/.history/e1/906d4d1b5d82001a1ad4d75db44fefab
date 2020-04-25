@@ -1,0 +1,27 @@
+package it.myalert.DTO;
+
+
+import java.util.Date;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+public class UserDTO {
+	
+	int idUser;
+	String Name;
+	String Surname;
+	@Email @NotEmpty 
+	String Email;
+	String Password;
+	Date BirthDate;
+	String Sex;
+	String Address;
+	String City;
+	String Country;
+	
+	
+	
+	
+
+}

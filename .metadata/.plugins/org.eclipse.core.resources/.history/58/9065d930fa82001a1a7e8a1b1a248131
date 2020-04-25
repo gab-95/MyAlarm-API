@@ -1,0 +1,206 @@
+// Generated with g9.
+
+package it.myalert.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Version;
+
+@Entity(name="alarm")
+public class Alarm implements Serializable {
+
+    
+    @Column(name="AlarmDate")
+    private Timestamp alarmDate;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="idCitizen", nullable=false)
+    private Citizen citizen;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="idIntervation", nullable=false)
+    private Intervention intervention;
+    @EmbeddedId
+    private AlarmId alarmId;
+
+    public AlarmId getAlarmId() {
+		return alarmId;
+	}
+
+	public void setAlarmId(AlarmId alarmId) {
+		this.alarmId = alarmId;
+	}
+
+	/** Default constructor. */
+    public Alarm() {
+        super();
+    }
+
+    /**
+     * Access method for alarmDate.
+     *
+     * @return the current value of alarmDate
+     */
+    public Timestamp getAlarmDate() {
+        return alarmDate;
+    }
+
+    /**
+     * Setter method for alarmDate.
+     *
+     * @param aAlarmDate the new value for alarmDate
+     */
+    public void setAlarmDate(Timestamp aAlarmDate) {
+        alarmDate = aAlarmDate;
+    }
+
+    /**
+     * Access method for citizen.
+     *
+     * @return the current value of citizen
+     */
+    public Citizen getCitizen() {
+        return citizen;
+    }
+
+    /**
+     * Setter method for citizen.
+     *
+     * @param aCitizen the new value for citizen
+     */
+    public void setCitizen(Citizen aCitizen) {
+        citizen = aCitizen;
+    }
+
+    /**
+     * Access method for intervention.
+     *
+     * @return the current value of intervention
+     */
+    public Intervention getIntervention() {
+        return intervention;
+    }
+
+    /**
+     * Setter method for intervention.
+     *
+     * @param aIntervention the new value for intervention
+     */
+    public void setIntervention(Intervention aIntervention) {
+        intervention = aIntervention;
+    }
+
+    /** Temporary value holder for group key fragment interventionIdIntervation */
+    private transient int tempInterventionIdIntervation;
+
+    /**
+     * Gets the key fragment idIntervation for member intervention.
+     * If this.intervention is null, a temporary stored value for the key
+     * fragment will be returned. The temporary value is set by setInterventionIdIntervation.
+     * This behavior is required by some persistence libraries to allow
+     * fetching of objects in arbitrary order.
+     *
+     * @return Current (or temporary) value of the key fragment
+     * @see Intervention
+     */
+    public int getInterventionIdIntervation() {
+        return (getIntervention() == null ? tempInterventionIdIntervation : getIntervention().getIdIntervation());
+    }
+
+    /**
+     * Sets the key fragment idIntervation from member intervention.
+     * If this.intervention is null, the passed value will be temporary
+     * stored, and returned by subsequent calls to getInterventionIdIntervation.
+     * This behaviour is required by some persistence libraries to allow
+     * fetching of objects in arbitrary order.
+     *
+     * @param aIdIntervation New value for the key fragment
+     * @see Intervention
+     */
+    public void setInterventionIdIntervation(int aIdIntervation) {
+        if (getIntervention() == null) {
+            tempInterventionIdIntervation = aIdIntervation;
+        } else {
+            getIntervention().setIdIntervation(aIdIntervation);
+        }
+    }
+
+    /**
+     * Compares the key for this instance with another Alarm.
+     *
+     * @param other The object to compare to
+     * @return True if other object is instance of class Alarm and the key objects are equal
+     */
+    private boolean equalKeys(Object other) {
+        if (this==other) {
+            return true;
+        }
+        if (!(other instanceof Alarm)) {
+            return false;
+        }
+        Alarm that = (Alarm) other;
+        if (this.getInterventionIdIntervation() != that.getInterventionIdIntervation()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Compares this instance with another Alarm.
+     *
+     * @param other The object to compare to
+     * @return True if the objects are the same
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Alarm)) return false;
+        return this.equalKeys(other) && ((Alarm)other).equalKeys(this);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        int i;
+        int result = 17;
+        i = getInterventionIdIntervation();
+        result = 37*result + i;
+        return result;
+    }
+
+    /**
+     * Returns a debug-friendly String representation of this instance.
+     *
+     * @return String representation of this instance
+     */
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer("[Alarm |");
+        sb.append(" interventionIdIntervation=").append(getInterventionIdIntervation());
+        sb.append("]");
+        return sb.toString();
+    }
+
+    /**
+     * Return all elements of the primary key.
+     *
+     * @return Map of key names to values
+     */
+    public Map<String, Object> getPrimaryKey() {
+        Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
+        ret.put("interventionIdIntervation", Integer.valueOf(getInterventionIdIntervation()));
+        return ret;
+    }
+
+}

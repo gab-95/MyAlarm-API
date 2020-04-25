@@ -1,0 +1,5 @@
+package it.myalert.restcontroller;
+
+public class UserRestController {
+
+}

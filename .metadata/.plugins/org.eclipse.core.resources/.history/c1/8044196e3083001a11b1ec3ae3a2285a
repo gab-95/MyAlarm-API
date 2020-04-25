@@ -1,0 +1,50 @@
+package it.myalert.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class AlarmId implements Serializable {
+	
+	private Citizen user;
+	private Intervention intervetion;
+	
+	public AlarmId( Citizen user, Intervention intervetion) {
+		this.user = user;
+		this.intervetion = intervetion;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((intervetion == null) ? 0 : intervetion.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AlarmId other = (AlarmId) obj;
+		if (intervetion == null) {
+			if (other.intervetion != null)
+				return false;
+		} else if (!intervetion.equals(other.intervetion))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+	
+
+}

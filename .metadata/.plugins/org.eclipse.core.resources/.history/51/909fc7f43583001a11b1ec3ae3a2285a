@@ -1,0 +1,46 @@
+package it.myalert.entity;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity(name="manager")
+public class Manager {
+
+	@Id
+	private int idManager;
+	
+
+	@PrimaryKeyJoinColumn(name="user")
+	private User user;
+	
+	private Date StartDate_task;
+	private Date EndDate_task;
+	public int getIdManager() {
+		return idManager;
+	}
+	public void setIdManager(int idManager) {
+		this.idManager = idManager;
+	}
+	public Date getStartDate_task() {
+		return StartDate_task;
+	}
+	public void setStartDate_task(Date startDate_task) {
+		StartDate_task = startDate_task;
+	}
+	public Date getEndDate_task() {
+		return EndDate_task;
+	}
+	public void setEndDate_task(Date endDate_task) {
+		EndDate_task = endDate_task;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+}

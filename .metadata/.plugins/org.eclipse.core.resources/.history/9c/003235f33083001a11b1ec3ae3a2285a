@@ -1,0 +1,23 @@
+package it.myalert.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import it.myalert.DTO.UserDTO;
+import it.myalert.adapterConverter.UserAdapter;
+import it.myalert.entity.User;
+import it.myalert.service.UserService;
+
+public class UserServiceImpl extends UserAdapter implements UserService  {
+
+	@Autowired
+	UserService userService;
+	
+	@Override
+	public List<User> getAll() {
+		
+		return userService.getAll();
+	}
+
+}

@@ -1,0 +1,15 @@
+package it.myalert.service;
+
+import java.util.List;
+
+import com.fasterxml.jackson.databind.util.Converter;
+
+import it.myalert.DTO.ManagerDTO;
+import it.myalert.entity.Manager;
+import it.myalert.entity.User;
+
+public interface ManagerService extends Converter<ManagerDTO, Manager>{
+	
+	public List<Manager> getAll();
+
+}

@@ -1,0 +1,93 @@
+package it.myalert.DTO;
+
+
+import java.util.Date;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class UserDTO {
+	
+	@NotEmpty
+	private int idUser;
+	@NotEmpty
+	private String Name;
+	@NotEmpty
+	private String Surname;
+	@Email @NotEmpty 
+	private String Email;
+	@NotEmpty
+	private Date BirthDate;
+	@NotEmpty
+	private String Sex;
+	@NotEmpty
+	private String Address;
+	@NotEmpty
+	private String City;
+	@NotEmpty
+	private String Country;
+	
+	
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		this.Name = name;
+	}
+	public String getSurname() {
+		return Surname;
+	}
+	public void setSurname(String surname) {
+		this.Surname = surname;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		this.Email = email;
+	}
+	
+	public Date getBirthDate() {
+		return BirthDate;
+	}
+	public void setBirthDate(Date birthDate) {
+		this.BirthDate = birthDate;
+	}
+	public String getSex() {
+		return Sex;
+	}
+	public void setSex(String sex) {
+		this.Sex = sex;
+	}
+	public String getAddress() {
+		return Address;
+	}
+	public void setAddress(String address) {
+		this.Address = address;
+	}
+	public String getCity() {
+		return City;
+	}
+	public void setCity(String city) {
+		this.City = city;
+	}
+	public String getCountry() {
+		return Country;
+	}
+	public void setCountry(String country) {
+		this.Country = country;
+	}
+	
+	
+	
+	
+
+}

@@ -1,0 +1,9 @@
+package it.myalert.DTO;
+
+public class CitizenDTO {
+
+	UserDTO user;
+	int idCitizen;
+	String Lat;
+	String Long;
+}
