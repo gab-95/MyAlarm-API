@@ -10,5 +10,6 @@ import it.myalert.exeption.AgentExeption;
 public interface AgentService extends Converter<AgentDTO, Agent> {
 
 	public List<Agent> getAll();
-	public Agent addAgent(Agent agent, int idManager) throws AgentExeption, Exception;
+	public Agent addAgent(Agent agent, int idManager) throws AgentExeption;
+	public Agent getAgentById(int idAgent) throws AgentExeption;
 }

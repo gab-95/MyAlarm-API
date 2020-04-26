@@ -30,8 +30,8 @@ public class Citizen implements Serializable {
     private Integer idCitizen;
     @Column(name="Lat", length=15)
     private String lat;
-    @Column(name="Long", length=15)
-    private String long_;
+    @Column(name="Lon", length=15)
+    private String lon;
     @OneToMany(mappedBy="citizen")
     private Set<Alarm> alarm;
     @ManyToOne(optional=false, cascade= {CascadeType.PERSIST})
@@ -84,8 +84,8 @@ public class Citizen implements Serializable {
      *
      * @return the current value of long_
      */
-    public String getLong_() {
-        return long_;
+    public String getLon() {
+        return lon;
     }
 
     /**
@@ -93,8 +93,8 @@ public class Citizen implements Serializable {
      *
      * @param aLong_ the new value for long_
      */
-    public void setLong_(String aLong_) {
-        long_ = aLong_;
+    public void setLon(String aLon) {
+        lon = aLon;
     }
 
     /**

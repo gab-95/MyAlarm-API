@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
@@ -15,16 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.mysql.cj.xdevapi.JsonArray;
 
 import it.myalert.DTO.AgentDTO;
 import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
-import it.myalert.entity.Manager;
 import it.myalert.exeption.AgentExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.service.AgentService;
@@ -60,12 +54,27 @@ public class AgentRestController {
 			return listDTO;
 		}
 		
+		//------------------GET AGENT FROM idAgent------------------------------------
+		@GetMapping(value="/getAgent/{idAgent}", produces=MediaType.APPLICATION_JSON_VALUE)
+		public ResponseBean getAgentById(@PathVariable("idAgent") int idAgent){
+			
+			try {
+				Agent agent = this.agentService.getAgentById(idAgent);
+				return ResponseBean.okResponse(agentService.convertToDTO(agent));	
+			}catch (Exception e) {
+				return ResponseBean.koResponseBean(null, e.getMessage());
+			}
+			
+			
+		}
+				
 		
-		//-----------------ADD AGENT----------------------------------------
+		//-----------------ADD AGENT FROM idManager----------------------------------------
 		@PostMapping(value="/addAgent/{idManager}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseBean post(@RequestBody AgentDTO agentDTO, @PathVariable("idManager") int idManager) throws AgentExeption, ManagerExeption {
 			ManagerDTO managerDTO = managerService.convertToDTO(managerService.getById(idManager));
 			agentDTO.setManagerDTO(managerDTO);
+			
 			try {
 				Agent agent = agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
 				return ResponseBean.okResponse(agent);
