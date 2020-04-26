@@ -1,7 +1,0 @@
-package it.myalert.service;
-
-import it.myalert.adapterConverter.Converter;
-
-public interface userService extends Converter<ToDTO, FromDTO> {
-
-}

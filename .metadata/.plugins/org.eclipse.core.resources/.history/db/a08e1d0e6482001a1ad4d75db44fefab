@@ -1,9 +1,0 @@
-package it.myalert.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import it.myalert.entity.User;
-
-public class UserRepository extends JpaRepository<User, Integer> {
-
-}

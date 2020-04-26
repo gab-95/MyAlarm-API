@@ -1,5 +1,0 @@
-package it.myalert.adapterConverter;
-
-public interface Converter {
-
-}

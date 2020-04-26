@@ -1,5 +1,0 @@
-package it.myalert.repository;
-
-public interface AgentRepository {
-
-}
