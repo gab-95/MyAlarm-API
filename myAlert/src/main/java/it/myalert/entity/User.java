@@ -29,7 +29,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idUser;
+    private Integer idUser;
     @Column(name="Name", nullable=false, length=45)
     private String name;
     @Column(name="Surname", nullable=false, length=45)
@@ -65,7 +65,7 @@ public class User implements Serializable {
      *
      * @return the current value of idUser
      */
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
@@ -74,7 +74,7 @@ public class User implements Serializable {
      *
      * @param aIdUser the new value for idUser
      */
-    public void setIdUser(int aIdUser) {
+    public void setIdUser(Integer aIdUser) {
         idUser = aIdUser;
     }
 

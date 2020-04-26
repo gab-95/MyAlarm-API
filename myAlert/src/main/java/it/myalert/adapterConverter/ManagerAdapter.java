@@ -16,7 +16,7 @@ public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
 	public ManagerDTO convertToDTO(Manager manager) {
 		
 		ManagerDTO managerDTO = new ManagerDTO();
-		//managerDTO.setIdManager(manager.getIdManager());
+		managerDTO.setIdManager(manager.getIdManager());
 		managerDTO.setUser(convertUser.convertToDTO(manager.getUser()));
 		managerDTO.setStartDate_task(manager.getStartDateTask());
 		managerDTO.setEndDate_task(manager.getEndDateTask());
@@ -27,7 +27,7 @@ public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
 	public Manager convertToEntity(ManagerDTO managerDTO) {
 
 		Manager manager = new Manager();
-		//manager.setIdManager(managerDTO.getIdManager());
+		manager.setIdManager(managerDTO.getIdManager());
 		manager.setUser(convertUser.convertToEntity(managerDTO.getUser()));
 		manager.setStartDateTask(new Timestamp(managerDTO.getStartDate_task().getTime()));
 		manager.setEndDateTask(new Timestamp(managerDTO.getEndDate_task().getTime()));

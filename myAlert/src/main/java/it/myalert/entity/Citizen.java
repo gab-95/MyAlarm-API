@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,14 +27,14 @@ public class Citizen implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idCitizen;
+    private Integer idCitizen;
     @Column(name="Lat", length=15)
     private String lat;
     @Column(name="Long", length=15)
     private String long_;
     @OneToMany(mappedBy="citizen")
     private Set<Alarm> alarm;
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, cascade= {CascadeType.PERSIST})
     @JoinColumn(name="idUser_FK", nullable=false)
     private User user;
 

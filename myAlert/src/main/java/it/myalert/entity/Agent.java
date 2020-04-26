@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,15 +29,15 @@ public class Agent implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idAgent;
+    private Integer idAgent;
     @Column(name="Department", nullable=false, length=45)
     private String department;
     @Column(name="Department_Code", nullable=false, length=10)
     private String departmentCode;
     @Column(name="Lat", length=15)
     private String lat;
-    @Column(name="Long", length=15)
-    private String long_;
+    @Column(name="Lon", length=15)
+    private String lon;
     @Column(name="StartDate_tsk")
     private Timestamp startDateTsk;
     @Column(name="EndDate_task")
@@ -44,7 +45,7 @@ public class Agent implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="idManager_FK", nullable=false)
     private Manager manager;
-    @ManyToOne(optional=false, cascade = {CascadeType.ALL})
+    @ManyToOne(optional=false, cascade= {CascadeType.PERSIST})
     @JoinColumn(name="idUser_FK", nullable=false)
     private User user;
     @OneToMany(mappedBy="agent")
@@ -60,7 +61,7 @@ public class Agent implements Serializable {
      *
      * @return the current value of idAgent
      */
-    public int getIdAgent() {
+    public Integer getIdAgent() {
         return idAgent;
     }
 
@@ -69,7 +70,7 @@ public class Agent implements Serializable {
      *
      * @param aIdAgent the new value for idAgent
      */
-    public void setIdAgent(int aIdAgent) {
+    public void setIdAgent(Integer aIdAgent) {
         idAgent = aIdAgent;
     }
 
@@ -133,7 +134,7 @@ public class Agent implements Serializable {
      * @return the current value of long_
      */
     public String getLong_() {
-        return long_;
+        return lon;
     }
 
     /**
@@ -141,8 +142,8 @@ public class Agent implements Serializable {
      *
      * @param aLong_ the new value for long_
      */
-    public void setLong_(String aLong_) {
-        long_ = aLong_;
+    public void setLong_(String aLon) {
+        lon = aLon;
     }
 
     /**

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 public class UserDTO {
 	
 	@NotEmpty
-	private int idUser;
+	private Integer idUser;
 	@NotEmpty
 	private String name;
 	@NotEmpty
@@ -28,10 +28,10 @@ public class UserDTO {
 	private String country;
 	
 	
-	public int getIdUser() {
+	public Integer getIdUser() {
 		return idUser;
 	}
-	public void setIdUser(int idUser) {
+	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
 	public String getName() {

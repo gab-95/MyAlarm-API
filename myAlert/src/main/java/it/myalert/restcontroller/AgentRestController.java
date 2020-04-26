@@ -8,8 +8,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.mysql.cj.xdevapi.JsonArray;
 
 import it.myalert.DTO.AgentDTO;
 import it.myalert.DTO.ManagerDTO;
+import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
 import it.myalert.entity.Manager;
 import it.myalert.exeption.AgentExeption;
@@ -59,13 +62,17 @@ public class AgentRestController {
 		
 		
 		//-----------------ADD AGENT----------------------------------------
-		@PostMapping(value="/addAgent", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public Agent post(@RequestBody AgentDTO agentDTO, @RequestParam("id") int idManager) throws AgentExeption, ManagerExeption {
-			System.out.println("Agent"+agentDTO.toString());
+		@PostMapping(value="/addAgent/{idManager}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseBean post(@RequestBody AgentDTO agentDTO, @PathVariable("idManager") int idManager) throws AgentExeption, ManagerExeption {
 			ManagerDTO managerDTO = managerService.convertToDTO(managerService.getById(idManager));
 			agentDTO.setManagerDTO(managerDTO);
-			agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
-			return null;
-			//return agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
+			try {
+				Agent agent = agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
+				return ResponseBean.okResponse(agent);
+			} catch (DataIntegrityViolationException e) {
+				return ResponseBean.koResponseBean(null, "Errore nell'inserimento");
+			}catch (Exception e) {
+				return ResponseBean.koResponseBean(null, "Errore non gestito");
+			} 
 		}
 }

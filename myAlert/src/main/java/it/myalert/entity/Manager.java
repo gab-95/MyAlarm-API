@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Manager implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idManager;
+    private Integer idManager;
     @Column(name="StartDate_task", nullable=false)
     private Timestamp startDateTask;
     @Column(name="EndDate_task")
@@ -36,7 +37,7 @@ public class Manager implements Serializable {
     private Set<Agent> agent;
     @OneToMany(mappedBy="manager")
     private Set<Assign> assign;
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, cascade= {CascadeType.PERSIST})
     @JoinColumn(name="idUser_FK", nullable=false)
     private User user;
     @OneToMany(mappedBy="manager")
@@ -52,7 +53,7 @@ public class Manager implements Serializable {
      *
      * @return the current value of idManager
      */
-    public int getIdManager() {
+    public Integer getIdManager() {
         return idManager;
     }
 
@@ -61,7 +62,7 @@ public class Manager implements Serializable {
      *
      * @param aIdManager the new value for idManager
      */
-    public void setIdManager(int aIdManager) {
+    public void setIdManager(Integer aIdManager) {
         idManager = aIdManager;
     }
 

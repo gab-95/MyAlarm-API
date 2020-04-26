@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AgentDTO {
 
-	private int idAgent;
+	private Integer idAgent;
 	private UserDTO user;
 	private String department;
 	private String department_Code;
@@ -39,10 +39,10 @@ public class AgentDTO {
 	public void setEndDate_task(Date endDate_task) {
 		this.endDate_task = endDate_task;
 	}
-	public int getIdAgent() {
+	public Integer getIdAgent() {
 		return idAgent;
 	}
-	public void setIdAgent(int idAgent) {
+	public void setIdAgent(Integer idAgent) {
 		this.idAgent = idAgent;
 	}
 	public UserDTO getUserDTO() {
