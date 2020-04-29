@@ -48,7 +48,7 @@ public class ManagerRestController {
 		return listDTO;
 	}
 	
-	
+	//-----------------GET MANAGER BY idManager ----------------------------------------
 	@GetMapping(value="/getManagerById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ManagerDTO getManagerById(@PathVariable int id) throws ManagerExeption{
 		

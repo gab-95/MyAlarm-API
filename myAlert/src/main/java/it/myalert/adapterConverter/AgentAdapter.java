@@ -26,7 +26,7 @@ public class AgentAdapter implements Converter<AgentDTO, Agent>{
 		agentDTO.setDepartment(agent.getDepartment());
 		agentDTO.setDepartment_Code(agent.getDepartmentCode());
 		agentDTO.setLat(agent.getLat());
-		agentDTO.setLon(agent.getLong_());
+		agentDTO.setLon(agent.getLon());
 		agentDTO.setStartDate_task(new Date(agent.getStartDateTsk().getTime()));
 		agentDTO.setEndDate_task(new Date(agent.getEndDateTask().getTime()));
 		
@@ -43,7 +43,7 @@ public class AgentAdapter implements Converter<AgentDTO, Agent>{
 		agent.setDepartment(agentDTO.getDepartment());
 		agent.setDepartmentCode(agentDTO.getDepartment_Code());
 		agent.setLat(agentDTO.getLat());
-		agent.setLong_(agentDTO.getLon());
+		agent.setLon(agentDTO.getLon());
 		agent.setStartDateTsk(new Timestamp(agentDTO.getStartDate_task().getTime()));
 		agent.setEndDateTask(new Timestamp(agentDTO.getEndDate_task().getTime()));
 		

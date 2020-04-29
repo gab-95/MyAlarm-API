@@ -131,7 +131,7 @@ public class Agent implements Serializable {
      *
      * @return the current value of long_
      */
-    public String getLong_() {
+    public String getLon() {
         return lon;
     }
 
@@ -140,7 +140,7 @@ public class Agent implements Serializable {
      *
      * @param aLong_ the new value for long_
      */
-    public void setLong_(String aLon) {
+    public void setLon(String aLon) {
         lon = aLon;
     }
 

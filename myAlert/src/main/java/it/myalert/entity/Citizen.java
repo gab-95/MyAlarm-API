@@ -48,7 +48,7 @@ public class Citizen implements Serializable {
      *
      * @return the current value of idCitizen
      */
-    public int getIdCitizen() {
+    public Integer getIdCitizen() {
         return idCitizen;
     }
 
@@ -57,7 +57,7 @@ public class Citizen implements Serializable {
      *
      * @param aIdCitizen the new value for idCitizen
      */
-    public void setIdCitizen(int aIdCitizen) {
+    public void setIdCitizen(Integer aIdCitizen) {
         idCitizen = aIdCitizen;
     }
 

@@ -11,15 +11,20 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.myalert.DTO.AgentDTO;
+import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
+import it.myalert.entity.Citizen;
 import it.myalert.exeption.AgentExeption;
+import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.service.AgentService;
 import it.myalert.service.ManagerService;
@@ -84,4 +89,12 @@ public class AgentRestController {
 				return ResponseBean.koResponseBean(null, "Errore non gestito");
 			} 
 		}
+		
+		//-----------------UPDATE POSITION AGENT ----------------------------------------
+		@PutMapping(value="/updatePosition/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") String lat, @RequestParam("lon") String lon) throws AgentExeption {
+				Agent agent = agentService.updatePosition(lat, lon, idAgent);
+				return agentService.convertToDTO(agent);
+		}
+
 }

@@ -44,6 +44,14 @@ public class AgentServiceImpl extends AgentAdapter implements AgentService {
 
 		return this.agentRepository.findById(idAgent).orElseThrow(()-> new AgentExeption("ERROR: No agent found with id:"+ idAgent));
 	}
+
+	@Override
+	public Agent updatePosition(String lat, String lon, int idAgent) throws AgentExeption {
+		Agent updatedAgent = this.agentRepository.findById(idAgent).orElseThrow(()-> new AgentExeption("ERROR: No agent found with id:"+ idAgent));
+		updatedAgent.setLat(lat);
+		updatedAgent.setLon(lon);
+		return updatedAgent;
+	}
 	
 	
 
