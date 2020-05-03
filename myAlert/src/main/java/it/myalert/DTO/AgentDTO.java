@@ -2,7 +2,7 @@ package it.myalert.DTO;
 
 import java.util.Date;
 
-public class AgentDTO {
+public class AgentDTO{
 
 	private Integer idAgent;
 	private UserDTO user;
@@ -13,6 +13,7 @@ public class AgentDTO {
 	private Date startDate_task;
 	private Date endDate_task;
 	private ManagerDTO manager;
+	
 	
 	
 	public String getLat() {

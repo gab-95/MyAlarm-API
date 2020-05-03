@@ -81,5 +81,14 @@ public class CitizenRestController {
 			Citizen citizen = citizenService.updatePosition(lat, lon, idCitizen);
 			return citizenService.convertToDTO(citizen);
 	}
+	
+	
+	//-----------------UPDATE  CITIZEN ----------------------------------------
+		@PutMapping(value="/updateCitizen/{idCitizen}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		public CitizenDTO updateCitizen(@RequestBody CitizenDTO citizenDTO, @PathVariable("idCitizen") int idCitizen) throws CitizenExeption {
+				System.out.print("parameter:" + citizenDTO.toString());
+				Citizen citizen = citizenService.updateCitizen(citizenService.convertToEntity(citizenDTO), idCitizen);
+				return citizenService.convertToDTO(citizen);
+		}
 
 }

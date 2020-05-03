@@ -3,11 +3,22 @@ package it.myalert.adapterConverter;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import it.myalert.DTO.UserDTO;
+import it.myalert.entity.Agent;
+import it.myalert.entity.Citizen;
+import it.myalert.entity.Manager;
 import it.myalert.entity.User;
 
 public class UserAdapter implements Converter<UserDTO, User> {
 
+	@Autowired
+	AgentAdapter agentConverter;
+	@Autowired
+	ManagerAdapter managerConverter;
+	@Autowired
+	CitizenAdapter citizenConverter;
 	@Override
 	public UserDTO convertToDTO(User user) {
 		

@@ -45,4 +45,10 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 		return this.citizenRepository.save(updatedCitizen);
 	}
 
+	@Override
+	public Citizen updateCitizen(Citizen citizen, int idCitizen) throws CitizenExeption {
+		//Citizen updatedCitizen = this.citizenRepository.findById(idCitizen).orElseThrow(()-> new CitizenExeption("ERROR: No citizen found with id:"+ idCitizen));
+		return this.citizenRepository.save(citizen);
+	}
+
 }

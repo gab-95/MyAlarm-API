@@ -15,7 +15,9 @@ public class CitizenAdapter implements Converter<CitizenDTO, Citizen>{
 
 		CitizenDTO citizenDTO = new CitizenDTO();
 		citizenDTO.setIdCitizen(citizen.getIdCitizen());
-		citizenDTO.setUserDTO(convertUser.convertToDTO(citizen.getUser()));
+		if(citizen.getUser() != null) {
+			citizenDTO.setUserDTO(convertUser.convertToDTO(citizen.getUser()));
+		}
 		citizenDTO.setLat(citizen.getLat());
 		citizenDTO.setLon(citizen.getLon());
 		return citizenDTO;
@@ -25,10 +27,10 @@ public class CitizenAdapter implements Converter<CitizenDTO, Citizen>{
 	public Citizen convertToEntity(CitizenDTO citizenDTO) {
 
 		Citizen citizen = new Citizen();
-		citizen.setIdCitizen(citizen.getIdCitizen());
+		citizen.setIdCitizen(citizenDTO.getIdCitizen());
 		citizen.setUser(convertUser.convertToEntity(citizenDTO.getUserDTO()));
-		citizen.setLat(citizen.getLat());
-		citizen.setLon(citizen.getLon());
+		citizen.setLat(citizenDTO.getLat());
+		citizen.setLon(citizenDTO.getLon());
 		return citizen;
 	}
 
