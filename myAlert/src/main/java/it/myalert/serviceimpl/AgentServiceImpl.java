@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.myalert.DTO.AgentDTO;
 import it.myalert.adapterConverter.AgentAdapter;
 import it.myalert.entity.Agent;
 import it.myalert.entity.User;

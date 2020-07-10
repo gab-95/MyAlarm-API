@@ -17,12 +17,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity(name="agent")
 public class Agent implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idAgent";
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -127,18 +129,18 @@ public class Agent implements Serializable {
     }
 
     /**
-     * Access method for long_.
+     * Access method for lon.
      *
-     * @return the current value of long_
+     * @return the current value of lon
      */
     public String getLon() {
         return lon;
     }
 
     /**
-     * Setter method for long_.
+     * Setter method for lon.
      *
-     * @param aLong_ the new value for long_
+     * @param aLon the new value for lon
      */
     public void setLon(String aLon) {
         lon = aLon;

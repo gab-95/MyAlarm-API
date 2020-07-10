@@ -24,6 +24,7 @@ public class Citizen implements Serializable {
     /** Primary key. */
     protected static final String PK = "idCitizen";
 
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
@@ -80,18 +81,18 @@ public class Citizen implements Serializable {
     }
 
     /**
-     * Access method for long_.
+     * Access method for lon.
      *
-     * @return the current value of long_
+     * @return the current value of lon
      */
     public String getLon() {
         return lon;
     }
 
     /**
-     * Setter method for long_.
+     * Setter method for lon.
      *
-     * @param aLong_ the new value for long_
+     * @param aLon the new value for lon
      */
     public void setLon(String aLon) {
         lon = aLon;

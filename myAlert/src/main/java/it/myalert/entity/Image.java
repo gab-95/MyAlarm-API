@@ -21,7 +21,7 @@ public class Image implements Serializable {
     /** Primary key. */
     protected static final String PK = "idImage";
 
-    
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)

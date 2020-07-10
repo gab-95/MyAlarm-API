@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +24,8 @@ public class User implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idUser";
+
+    
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,7 +47,7 @@ public class User implements Serializable {
     private String city;
     @Column(name="Country", nullable=false, length=45)
     private String country;
-    @OneToMany(mappedBy="user", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy="user")
     private Set<Agent> agent;
     @OneToMany(mappedBy="user")
     private Set<Citizen> citizen;

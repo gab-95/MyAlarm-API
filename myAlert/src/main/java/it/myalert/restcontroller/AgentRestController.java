@@ -18,14 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.myalert.DTO.AgentDTO;
-import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
-import it.myalert.entity.Citizen;
-import it.myalert.entity.Manager;
 import it.myalert.exeption.AgentExeption;
-import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.service.AgentService;
 import it.myalert.service.ManagerService;

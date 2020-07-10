@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +24,10 @@ public class Intervention implements Serializable {
     /** Primary key. */
     protected static final String PK = "idIntervation";
 
-     @Id
+
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
     private int idIntervation;
     @Column(name="Lat", nullable=false, length=15)
