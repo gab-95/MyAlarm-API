@@ -1,0 +1,34 @@
+*********** USER ******************
+
+/user/getAll
+/user/getByEmail/?email={string}
+
+*********** AGENT ******************
+
+/agent/getAllAgent
+/agent/getAgent/{idAgent}
+/agent/addAgent/{idManager}  -- body {userDTO: {}, department: dep, ....}
+/agent/updatePosition/{idAgent}?lat={int}&lon={int}
+/agent/updateAgent/{idAgent} --body {idAgent: int, userDTO: {}, department: dep, ....}
+
+*********** CITIZEN ******************
+
+/citizen/getAll
+/citizen/getCitizenById/{id}
+/citizen/addCitizen -- body { userDTO: {} }
+/citizen/updatePosition/{idCitizen}?lat={int}&lon={int}
+/citizen/updateCitizen/{idCitizen} -- body { idCitizen: int, userDTO: {}, lat: ..... }
+
+*********** MANAGER ******************
+
+/manager/getAll
+/manager/getManagerById/{id}
+/manager/addManager -- body { user: {}, startDate_task: date, .....}
+
+*********** TYPE ******************
+
+/type/getAllType
+/type/getType/{id}
+/type/addType/{idManager}?name={string}
+/type/updateType/{idType}?idManager={int}(optional)&name={string}
+/type/deleteType/{idType}
