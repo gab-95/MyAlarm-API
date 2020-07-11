@@ -28,7 +28,12 @@
 *********** TYPE ******************
 
 /type/getAllType
-/type/getType/{id}
+/type/getTypeById/{id}
 /type/addType/{idManager}?name={string}
 /type/updateType/{idType}?idManager={int}(optional)&name={string}
 /type/deleteType/{idType}
+
+*********** INTERVENTION ******************
+
+/intervention/getAllIntervention
+/intervention/getInterventionById/{id}

@@ -28,6 +28,7 @@ public class ManagerRestController {
 	@Autowired
 	ManagerService managerService;
 	
+	//-----------------GET ALL MANAGER ----------------------------------------
 	@GetMapping(value="/getAll", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<ManagerDTO> getAll(){
 		

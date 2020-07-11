@@ -22,18 +22,18 @@ import javax.persistence.Version;
 public class Intervention implements Serializable {
 
     /** Primary key. */
-    protected static final String PK = "idIntervation";
+    protected static final String PK = "idIntervention";
 
 
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idIntervation;
+    private int idIntervention;
     @Column(name="Lat", nullable=false, length=15)
     private String lat;
-    @Column(name="Long", nullable=false, length=15)
-    private String long_;
+    @Column(name="Lon", nullable=false, length=15)
+    private String lon;
     @Column(name="Address", nullable=false, length=45)
     private String address;
     @Column(name="City", nullable=false, length=45)
@@ -49,7 +49,7 @@ public class Intervention implements Serializable {
     @Column(name="Status", nullable=false, length=45)
     private String status;
     @ManyToOne(optional=false)
-    @JoinColumn(name="Type", nullable=false)
+    @JoinColumn(name="idType", nullable=false)
     private Type type;
     @OneToMany(mappedBy="intervention")
     private Set<Assign> assign;
@@ -64,21 +64,21 @@ public class Intervention implements Serializable {
     }
 
     /**
-     * Access method for idIntervation.
+     * Access method for idIntervention.
      *
-     * @return the current value of idIntervation
+     * @return the current value of idIntervention
      */
-    public int getIdIntervation() {
-        return idIntervation;
+    public int getIdIntervention() {
+        return idIntervention;
     }
 
     /**
-     * Setter method for idIntervation.
+     * Setter method for idIntervention.
      *
-     * @param aIdIntervation the new value for idIntervation
+     * @param aIdIntervation the new value for idIntervention
      */
-    public void setIdIntervation(int aIdIntervation) {
-        idIntervation = aIdIntervation;
+    public void setIdIntervention(int aIdIntervention) {
+        idIntervention = aIdIntervention;
     }
 
     /**
@@ -100,21 +100,21 @@ public class Intervention implements Serializable {
     }
 
     /**
-     * Access method for long_.
+     * Access method for lon.
      *
-     * @return the current value of long_
+     * @return the current value of lon
      */
-    public String getLong_() {
-        return long_;
+    public String getLon() {
+        return lon;
     }
 
     /**
-     * Setter method for long_.
+     * Setter method for lon.
      *
-     * @param aLong_ the new value for long_
+     * @param aLong_ the new value for lon
      */
-    public void setLong_(String aLong_) {
-        long_ = aLong_;
+    public void setLon(String aLon) {
+        lon = aLon;
     }
 
     /**
@@ -329,7 +329,7 @@ public class Intervention implements Serializable {
             return false;
         }
         Intervention that = (Intervention) other;
-        if (this.getIdIntervation() != that.getIdIntervation()) {
+        if (this.getIdIntervention() != that.getIdIntervention()) {
             return false;
         }
         return true;
@@ -356,7 +356,7 @@ public class Intervention implements Serializable {
     public int hashCode() {
         int i;
         int result = 17;
-        i = getIdIntervation();
+        i = getIdIntervention();
         result = 37*result + i;
         return result;
     }
@@ -369,7 +369,7 @@ public class Intervention implements Serializable {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("[Intervention |");
-        sb.append(" idIntervation=").append(getIdIntervation());
+        sb.append(" idIntervation=").append(getIdIntervention());
         sb.append("]");
         return sb.toString();
     }
@@ -381,7 +381,7 @@ public class Intervention implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idIntervation", Integer.valueOf(getIdIntervation()));
+        ret.put("idIntervation", Integer.valueOf(getIdIntervention()));
         return ret;
     }
 

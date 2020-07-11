@@ -30,10 +30,10 @@ public class Image implements Serializable {
     private String url;
     @Column(name="Lat", length=15)
     private String lat;
-    @Column(name="Long", length=15)
-    private String long_;
+    @Column(name="Lon", length=15)
+    private String lon;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
     @ManyToOne(optional=false)
     @JoinColumn(name="idUser", nullable=false)
@@ -99,21 +99,21 @@ public class Image implements Serializable {
     }
 
     /**
-     * Access method for long_.
+     * Access method for lon.
      *
-     * @return the current value of long_
+     * @return the current value of lon
      */
-    public String getLong_() {
-        return long_;
+    public String getLon() {
+        return lon;
     }
 
     /**
-     * Setter method for long_.
+     * Setter method for lon.
      *
-     * @param aLong_ the new value for long_
+     * @param aLong_ the new value for lon
      */
-    public void setLong_(String aLong_) {
-        long_ = aLong_;
+    public void setLon(String aLon) {
+        lon = aLon;
     }
 
     /**

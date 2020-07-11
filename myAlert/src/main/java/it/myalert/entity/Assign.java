@@ -40,7 +40,7 @@ public class Assign implements Serializable {
     @JoinColumn(name="idAgent", nullable=false)
     private Agent agent;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
     @ManyToOne(optional=false)
     @JoinColumn(name="idManager", nullable=false)

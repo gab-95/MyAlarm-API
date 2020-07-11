@@ -13,21 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Delete;
-
-import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
 import it.myalert.DTO.TypeDTO;
-import it.myalert.entity.Agent;
-import it.myalert.entity.Citizen;
 import it.myalert.entity.Type;
-import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.exeption.TypeExeption;
 import it.myalert.service.ManagerService;
@@ -64,7 +57,7 @@ public class TypeRestController {
 	
 	
 	//-----------------GET CITIZEN BY idCitizen ----------------------------------------
-	@GetMapping(value="/getType/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/getTypeById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public TypeDTO getTypeById(@PathVariable int id) throws TypeExeption{
 		
 		Type type = typeService.getTypeById(id);

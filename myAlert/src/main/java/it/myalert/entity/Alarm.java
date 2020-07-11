@@ -34,7 +34,7 @@ public class Alarm implements Serializable {
     @JoinColumn(name="idCitizen", nullable=false)
     private Citizen citizen;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
 
     /** Default constructor. */
