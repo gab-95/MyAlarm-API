@@ -27,7 +27,7 @@ public class Alarm implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idAlarm;
+    private Integer idAlarm;
     @Column(name="AlarmDate")
     private Timestamp alarmDate;
     @ManyToOne(optional=false)
@@ -47,7 +47,7 @@ public class Alarm implements Serializable {
      *
      * @return the current value of idAlarm
      */
-    public int getIdAlarm() {
+    public Integer getIdAlarm() {
         return idAlarm;
     }
 
@@ -56,7 +56,7 @@ public class Alarm implements Serializable {
      *
      * @param aIdAlarm the new value for idAlarm
      */
-    public void setIdAlarm(int aIdAlarm) {
+    public void setIdAlarm(Integer aIdAlarm) {
         idAlarm = aIdAlarm;
     }
 

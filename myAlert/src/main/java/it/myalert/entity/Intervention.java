@@ -29,7 +29,7 @@ public class Intervention implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idIntervention;
+    private Integer idIntervention;
     @Column(name="Lat", nullable=false, length=15)
     private String lat;
     @Column(name="Lon", nullable=false, length=15)
@@ -68,7 +68,7 @@ public class Intervention implements Serializable {
      *
      * @return the current value of idIntervention
      */
-    public int getIdIntervention() {
+    public Integer getIdIntervention() {
         return idIntervention;
     }
 
@@ -77,7 +77,7 @@ public class Intervention implements Serializable {
      *
      * @param aIdIntervation the new value for idIntervention
      */
-    public void setIdIntervention(int aIdIntervention) {
+    public void setIdIntervention(Integer aIdIntervention) {
         idIntervention = aIdIntervention;
     }
 

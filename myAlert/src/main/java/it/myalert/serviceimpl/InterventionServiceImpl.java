@@ -31,4 +31,15 @@ public class InterventionServiceImpl extends InterventionAdapter implements Inte
 		return this.interventionRepository.findById(idIntervention).orElseThrow(()-> new InterventionExeption("ERROR: No intervention found with id:"+ idIntervention));
 	}
 
+	@Override
+	public Intervention addIntervention(Intervention intervention) throws InterventionExeption {
+		intervention.setIdIntervention(null);
+		return this.interventionRepository.save(intervention);
+	}
+
+	@Override
+	public List<Intervention> getAllInterventionByStatusAndType(int idType, String status) throws InterruptedException {
+		return interventionRepository.findInterventionByStatusAndType_idType(status, idType);
+	}
+
 }

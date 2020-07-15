@@ -39,7 +39,7 @@ public class TypeRestController {
 	@GetMapping(value="/getAllType", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<TypeDTO> getAll(){
 		
-		List<Type> list = typeService.getAllType();
+		List<Type> list = typeService.getAll();
 		List<TypeDTO> listDTO = new ArrayList<TypeDTO>();
 		Iterator<Type> typeIT = list.iterator();
 		

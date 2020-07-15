@@ -25,7 +25,7 @@ public class TypeServiceImpl extends TypeAdapter implements TypeService {
 	private TypeRepository typeRepository;
 	
 	@Override
-	public List<Type> getAllType() {
+	public List<Type> getAll() {
 		
 		return this.typeRepository.findAll();
 	}

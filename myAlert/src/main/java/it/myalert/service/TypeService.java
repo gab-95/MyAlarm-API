@@ -12,7 +12,7 @@ import it.myalert.exeption.TypeExeption;
 
 public interface TypeService extends Converter<TypeDTO, Type>{
 	
-	public List<Type> getAllType(); 
+	public List<Type> getAll(); 
 	public Type getTypeById(int idType) throws TypeExeption;
 	public Type addType(Type type) throws ManagerExeption;
 	public Type updateType(Type type) throws TypeExeption;

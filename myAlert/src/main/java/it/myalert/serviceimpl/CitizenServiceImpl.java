@@ -20,6 +20,7 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 
 	@Autowired
 	private CitizenRepository citizenRepository;
+	
 	@Override
 	public List<Citizen> getAll() {
 		return this.citizenRepository.findAll();

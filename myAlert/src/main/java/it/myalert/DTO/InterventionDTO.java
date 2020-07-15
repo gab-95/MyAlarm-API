@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class InterventionDTO {
 	
-	private int idIntervention;
+	private Integer idIntervention;
 	private TypeDTO type;
 	private String lat;
 	private String lon;
@@ -17,10 +17,10 @@ public class InterventionDTO {
 	private String status;
 	
 	
-	public int getIdIntervention() {
+	public Integer getIdIntervention() {
 		return idIntervention;
 	}
-	public void setIdIntervention(int idIntervention) {
+	public void setIdIntervention(Integer idIntervention) {
 		this.idIntervention = idIntervention;
 	}
 	public TypeDTO getType() {

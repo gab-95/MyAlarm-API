@@ -11,5 +11,7 @@ public interface InterventionService extends Converter<InterventionDTO, Interven
 	
 	public List<Intervention> getAll();
 	public Intervention getById(int idIntervention) throws InterventionExeption;
+	public Intervention addIntervention(Intervention intervention) throws InterventionExeption;
+	public List<Intervention> getAllInterventionByStatusAndType(int idType, String status) throws InterruptedException;
 
 }
