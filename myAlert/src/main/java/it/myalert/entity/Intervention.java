@@ -30,10 +30,10 @@ public class Intervention implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
     private Integer idIntervention;
-    @Column(name="Lat", nullable=false, length=15)
-    private String lat;
-    @Column(name="Lon", nullable=false, length=15)
-    private String lon;
+    @Column(name="Lat", nullable=false)
+    private Double lat;
+    @Column(name="Lon", nullable=false)
+    private Double lon;
     @Column(name="Address", nullable=false, length=45)
     private String address;
     @Column(name="City", nullable=false, length=45)
@@ -86,7 +86,7 @@ public class Intervention implements Serializable {
      *
      * @return the current value of lat
      */
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -95,7 +95,7 @@ public class Intervention implements Serializable {
      *
      * @param aLat the new value for lat
      */
-    public void setLat(String aLat) {
+    public void setLat(Double aLat) {
         lat = aLat;
     }
 
@@ -104,7 +104,7 @@ public class Intervention implements Serializable {
      *
      * @return the current value of lon
      */
-    public String getLon() {
+    public Double getLon() {
         return lon;
     }
 
@@ -113,7 +113,7 @@ public class Intervention implements Serializable {
      *
      * @param aLong_ the new value for lon
      */
-    public void setLon(String aLon) {
+    public void setLon(Double aLon) {
         lon = aLon;
     }
 

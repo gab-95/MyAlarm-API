@@ -112,20 +112,15 @@ public class InterventionRestController {
 	}
 	
 	
-	private double distance(String lat1_s, String lon1_s, String lat2_s, String lon2_s) {
+	private double distance(Double lat1_s, Double lon1_s, Double lat2_s, Double lon2_s) {
 		
-		//convert string args to double
-		Double lat1 = Double.parseDouble(lat1_s);
-		Double lon1 = Double.parseDouble(lon1_s);
-		Double lat2 = Double.parseDouble(lat2_s);
-		Double lon2 = Double.parseDouble(lon2_s);
-		
-		if ((lat1.compareTo(lat2) == 0) && (lon1.compareTo(lon2)== 0)) {
+
+		if ((lat1_s.compareTo(lat2_s) == 0) && (lon1_s.compareTo(lon2_s)== 0)) {
 			return 0;
 		}
 		else {
-			double theta = lon1 - lon2;
-			double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+			double theta = lon1_s - lon2_s;
+			double dist = Math.sin(Math.toRadians(lat1_s)) * Math.sin(Math.toRadians(lat2_s)) + Math.cos(Math.toRadians(lat1_s)) * Math.cos(Math.toRadians(lat2_s)) * Math.cos(Math.toRadians(theta));
 			dist = Math.acos(dist);
 			dist = Math.toDegrees(dist);
 			dist = dist * 60 * 1.1515;

@@ -89,7 +89,7 @@ public class AgentRestController {
 		
 		//-----------------UPDATE POSITION AGENT ----------------------------------------
 		@PutMapping(value="/updatePosition/{idAgent}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") String lat, @RequestParam("lon") String lon) throws AgentExeption {
+		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws AgentExeption {
 				Agent agent = agentService.updatePosition(lat, lon, idAgent);
 				return agentService.convertToDTO(agent);
 		}

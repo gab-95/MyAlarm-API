@@ -34,10 +34,10 @@ public class Agent implements Serializable {
     private String department;
     @Column(name="Department_Code", nullable=false, length=10)
     private String departmentCode;
-    @Column(name="Lat", length=15)
-    private String lat;
-    @Column(name="Lon", length=15)
-    private String lon;
+    @Column(name="Lat")
+    private Double lat;
+    @Column(name="Lon")
+    private Double lon;
     @Column(name="StartDate_tsk")
     private Timestamp startDateTsk;
     @Column(name="EndDate_task")
@@ -115,7 +115,7 @@ public class Agent implements Serializable {
      *
      * @return the current value of lat
      */
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -124,7 +124,7 @@ public class Agent implements Serializable {
      *
      * @param aLat the new value for lat
      */
-    public void setLat(String aLat) {
+    public void setLat(Double aLat) {
         lat = aLat;
     }
 
@@ -133,7 +133,7 @@ public class Agent implements Serializable {
      *
      * @return the current value of lon
      */
-    public String getLon() {
+    public Double getLon() {
         return lon;
     }
 
@@ -142,7 +142,7 @@ public class Agent implements Serializable {
      *
      * @param aLon the new value for lon
      */
-    public void setLon(String aLon) {
+    public void setLon(Double aLon) {
         lon = aLon;
     }
 

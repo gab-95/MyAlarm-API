@@ -42,7 +42,7 @@ public class UserAdapter implements Converter<UserDTO, User> {
 		user.setEmail(userDTO.getEmail());
 		user.setBirthDate(new Timestamp(userDTO.getBirthDate().getTime()));
 		user.setSex(userDTO.getSex());
-		user.setAdress(userDTO.getSex());
+		user.setAdress(userDTO.getAddress());
 		user.setCity(userDTO.getCity());
 		user.setCountry(userDTO.getCountry());
 		return user;

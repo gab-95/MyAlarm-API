@@ -13,6 +13,6 @@ public interface CitizenService extends Converter<CitizenDTO, Citizen>{
 	public Citizen getCitizenById(int idCitizen) throws CitizenExeption;
 	public Citizen addCitizen(Citizen citizen) throws CitizenExeption;
 	public Citizen updateCitizen(Citizen citizen, int idCitizen) throws CitizenExeption;
-	public Citizen updatePosition(String lat, String lon, int idCitizen) throws CitizenExeption;
+	public Citizen updatePosition(Double lat, Double lon, int idCitizen) throws CitizenExeption;
 
 }

@@ -6,8 +6,8 @@ public class InterventionDTO {
 	
 	private Integer idIntervention;
 	private TypeDTO type;
-	private String lat;
-	private String lon;
+	private Double lat;
+	private Double lon;
 	private String address;
 	private String city;
 	private Date startDate;
@@ -29,16 +29,16 @@ public class InterventionDTO {
 	public void setType(TypeDTO type) {
 		this.type = type;
 	}
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
-	public String getLon() {
+	public Double getLon() {
 		return lon;
 	}
-	public void setLon(String lon) {
+	public void setLon(Double lon) {
 		this.lon = lon;
 	}
 	public String getAddress() {

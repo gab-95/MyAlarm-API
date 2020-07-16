@@ -8,24 +8,24 @@ public class AgentDTO{
 	private UserDTO user;
 	private String department;
 	private String department_Code;
-	private String lat;
-	private String lon;
+	private Double lat;
+	private Double lon;
 	private Date startDate_task;
 	private Date endDate_task;
 	private ManagerDTO manager;
 	
 	
 	
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
-	public String getLon() {
+	public Double getLon() {
 		return lon;
 	}
-	public void setLon(String lon) {
+	public void setLon(Double lon) {
 		this.lon = lon;
 	}
 	public Date getStartDate_task() {
@@ -49,8 +49,8 @@ public class AgentDTO{
 	public UserDTO getUserDTO() {
 		return user;
 	}
-	public void setUserDTO(UserDTO userDTO) {
-		this.user = userDTO;
+	public void setUserDTO(UserDTO user) {
+		this.user = user;
 	}
 	public String getDepartment() {
 		return department;

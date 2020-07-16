@@ -62,8 +62,7 @@ public class CitizenRestController {
 	
 	//-----------------ADD CITIZEN ----------------------------------------
 	@PostMapping(value="/addCitizen", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public CitizenDTO post(@RequestBody CitizenDTO citizenDTO) throws CitizenExeption {
-		
+	public CitizenDTO post(@RequestBody CitizenDTO citizenDTO) throws CitizenExeption {	
 			Citizen citizen = citizenService.addCitizen(citizenService.convertToEntity(citizenDTO));
 			return citizenService.convertToDTO(citizen);
 	}
@@ -71,7 +70,7 @@ public class CitizenRestController {
 	
 	//-----------------UPDATE POSITION CITIZEN ----------------------------------------
 	@PutMapping(value="/updatePosition/{idCitizen}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public CitizenDTO updatePosition(@PathVariable("idCitizen") int idCitizen, @RequestParam("lat") String lat, @RequestParam("lon") String lon) throws CitizenExeption {
+	public CitizenDTO updatePosition(@PathVariable("idCitizen") int idCitizen, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws CitizenExeption {
 			System.out.print("parameter:" + idCitizen + lat + lon);
 			Citizen citizen = citizenService.updatePosition(lat, lon, idCitizen);
 			return citizenService.convertToDTO(citizen);

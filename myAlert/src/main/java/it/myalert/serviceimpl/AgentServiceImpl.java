@@ -49,7 +49,7 @@ public class AgentServiceImpl extends AgentAdapter implements AgentService {
 	}
 
 	@Override
-	public Agent updatePosition(String lat, String lon, int idAgent) throws AgentExeption {
+	public Agent updatePosition(Double lat, Double lon, int idAgent) throws AgentExeption {
 		Agent updatedAgent = this.agentRepository.findById(idAgent).orElseThrow(()-> new AgentExeption("ERROR: No agent found with id:"+ idAgent));
 		updatedAgent.setLat(lat);
 		updatedAgent.setLon(lon);
