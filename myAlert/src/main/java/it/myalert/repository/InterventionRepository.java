@@ -10,6 +10,7 @@ import it.myalert.entity.Intervention;
 @Repository
 public interface InterventionRepository extends JpaRepository<Intervention, Integer>{
 
-	public List<Intervention> findInterventionByStatusAndType_idType(String status, int idType);
+	
+	public List<Intervention> findByStatusAndType_idType(String status, int idType);
 
 }

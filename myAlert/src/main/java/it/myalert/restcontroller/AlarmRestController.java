@@ -22,6 +22,7 @@ import it.myalert.entity.Alarm;
 import it.myalert.entity.Citizen;
 import it.myalert.exeption.AlarmExeption;
 import it.myalert.exeption.CitizenExeption;
+import it.myalert.exeption.InterventionExeption;
 import it.myalert.service.AlarmService;
 
 @RestController
@@ -35,9 +36,8 @@ public class AlarmRestController {
 	@GetMapping(value="/getAllAlarm", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AlarmDTO> getAll(){
 		
-		List<Alarm> list = alarmService.getAll();
 		List<AlarmDTO> listDTO = new ArrayList<AlarmDTO>();
-		Iterator<Alarm> alarmIT = list.iterator();
+		Iterator<Alarm> alarmIT = alarmService.getAll().iterator();
 		
 		while(alarmIT.hasNext()) {
 			
@@ -57,6 +57,34 @@ public class AlarmRestController {
 		
 		Alarm alarm = alarmService.getAlarmById(id);
 		return alarmService.convertToDTO(alarm);
+		
+	}
+	
+	//-----------------GET ALL ALARM BY idIntervention ----------------------------------------
+	@GetMapping(value="/getAllAlarmByIdIntervention/{idIntervention}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlarmDTO> getAllAlarmByIdIntervention(@PathVariable("idIntervention") int idIntervention) throws InterventionExeption{
+		
+		Iterator<Alarm> listIT = alarmService.getAllAlarmByIdIntervention(idIntervention).iterator();
+		List<AlarmDTO> listDTO = new ArrayList<AlarmDTO>();
+		
+		while(listIT.hasNext()) {
+			listDTO.add(alarmService.convertToDTO(listIT.next()));
+		}
+		return listDTO;
+		
+	}
+	
+	//-----------------GET ALL ALARM BY idCitizen ----------------------------------------
+	@GetMapping(value="/getAllAlarmByIdCitizen/{idCitizen}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlarmDTO> getAllAlarmByIdCitizen(@PathVariable("idCitizen") int idCitizen) throws CitizenExeption{
+		
+		Iterator<Alarm> listIT = alarmService.getAllAlarmByIdCitizen(idCitizen).iterator();
+		List<AlarmDTO> listDTO = new ArrayList<AlarmDTO>();
+		
+		while(listIT.hasNext()) {
+			listDTO.add(alarmService.convertToDTO(listIT.next()));
+		}
+		return listDTO;
 		
 	}
 	

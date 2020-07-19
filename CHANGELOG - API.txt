@@ -37,11 +37,13 @@
 
 /intervention/getAllIntervention
 /intervention/getInterventionById/{id}
-/intervention/addIntervention?idType={id}&idCitizen={idCitizen} --> add alarm from alarmService -- body { type: {}, lat: ....}
+/intervention/addIntervention?idType={id}&idCitizen={idCitizen} --> add alarm from alarmService -- body { address: {address}, lat: ....}
+/intervention/updateIntervention/{idIntervention}?idType={idType} -- body { address: {address}, lat: ....}
 
 
-
-*********** ALERT ******************
+*********** ALARM ******************
 
 /alarm/getAllAlarm
 /alarm/getAlarmById/{id}
+/alarm/getAllAlarmByIdIntervention/{idIntervention}
+/alarm//getAllAlarmByIdCitizen/{idCitizen}

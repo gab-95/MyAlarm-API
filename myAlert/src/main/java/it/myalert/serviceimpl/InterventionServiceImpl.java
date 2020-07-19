@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import it.myalert.adapterConverter.InterventionAdapter;
 import it.myalert.entity.Intervention;
+import it.myalert.entity.Type;
 import it.myalert.exeption.InterventionExeption;
+import it.myalert.exeption.TypeExeption;
 import it.myalert.repository.InterventionRepository;
 import it.myalert.service.InterventionService;
 
@@ -38,8 +40,14 @@ public class InterventionServiceImpl extends InterventionAdapter implements Inte
 	}
 
 	@Override
-	public List<Intervention> getAllInterventionByStatusAndType(int idType, String status) throws InterruptedException {
-		return interventionRepository.findInterventionByStatusAndType_idType(status, idType);
+	public List<Intervention> getAllInterventionByStatusAndType(int idType, String status) throws InterventionExeption {
+		return interventionRepository.findByStatusAndType_idType(status, idType);
+	}
+	
+	@Override
+	public Intervention updateIntervention(Intervention intervention) throws InterventionExeption {
+		
+		return this.interventionRepository.save(intervention);
 	}
 
 }

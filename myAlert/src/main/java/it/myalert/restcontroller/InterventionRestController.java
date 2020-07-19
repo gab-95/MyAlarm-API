@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,13 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.InterventionDTO;
 import it.myalert.DTO.ManagerDTO;
+import it.myalert.DTO.TypeDTO;
 import it.myalert.entity.Alarm;
 import it.myalert.entity.Citizen;
 import it.myalert.entity.Intervention;
 import it.myalert.entity.Manager;
+import it.myalert.entity.Type;
 import it.myalert.exeption.AlarmExeption;
 import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.InterventionExeption;
+import it.myalert.exeption.ManagerExeption;
 import it.myalert.exeption.TypeExeption;
 import it.myalert.service.AlarmService;
 import it.myalert.service.CitizenService;
@@ -70,7 +75,7 @@ public class InterventionRestController {
 	
 	//-----------------GET INTERVENTION BY idIntervention ----------------------------------------
 	@GetMapping(value="/getInterventionById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public InterventionDTO getCitizenById(@PathVariable("id") int id) throws InterventionExeption{
+	public InterventionDTO getInterventionById(@PathVariable("id") int id) throws InterventionExeption{
 		
 		Intervention intervention = interventionService.getById(id);
 		return interventionService.convertToDTO(intervention);
@@ -80,23 +85,26 @@ public class InterventionRestController {
 	
 	//-----------------ADD INTERVENTION ----------------------------------------
 	@PostMapping(value="/addIntervention", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public InterventionDTO post(@RequestBody InterventionDTO interventionDTO, @RequestParam("idType")int idType, @RequestParam("idCitizen")int idCitizen) throws TypeExeption, InterventionExeption, CitizenExeption, AlarmExeption {
+	public InterventionDTO post(@RequestBody InterventionDTO interventionDTO, @RequestParam("idType") int idType, @RequestParam("idCitizen") int idCitizen) throws TypeExeption, InterventionExeption, CitizenExeption, AlarmExeption {
 		
 			
 		int limit = 50; //mt
 		interventionDTO.setType(typeService.convertToDTO(typeService.getTypeById(idType)));
 		Intervention intervention = new Intervention();
 
+
 		//get intervention by status & type
-		Iterator<InterventionDTO> listInterventionDTOit = this.getAll().iterator();
-		while(listInterventionDTOit.hasNext()) {
+		Iterator<Intervention> listInterventionIT = interventionService.getAllInterventionByStatusAndType(idType, "signaled").iterator();
+		
+		while(listInterventionIT.hasNext()) {
+			Intervention InterventionIT = listInterventionIT.next();
 			//calc dist from current intervention and listInterventionIT already saved
-			Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), listInterventionDTOit.next().getLat(), listInterventionDTOit.next().getLon());
+			Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
 			if( distance > limit) {
-				System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ listInterventionDTOit.next().getIdIntervention());
+				System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ listInterventionIT.next().getIdIntervention());
 				intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
 			}else {
-				intervention = interventionService.convertToEntity(listInterventionDTOit.next());
+				intervention = InterventionIT;
 			}
 
 		}
@@ -111,7 +119,7 @@ public class InterventionRestController {
 		return interventionService.convertToDTO(intervention);
 	}
 	
-	
+	// GET DISTANCE FROM 2 COORDS (1 from DTO, 1 from same intervention)
 	private double distance(Double lat1_s, Double lon1_s, Double lat2_s, Double lon2_s) {
 		
 
@@ -126,6 +134,19 @@ public class InterventionRestController {
 			dist = dist * 60 * 1.1515;
 			return (dist); //in mt
 		}
+	}
+	
+	
+	//-----------------UPDATE  TYPE ----------------------------------------
+	@PutMapping(value="/updateIntervention/{idIntervention}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public InterventionDTO updateIntervention(@PathVariable("idIntervention") int idIntervention, @RequestBody InterventionDTO interventionDTO, @RequestParam("idType")int idType) throws InterventionExeption, TypeExeption {	
+		
+		
+		interventionDTO.setIdIntervention(idIntervention);
+		interventionDTO.setType(typeService.convertToDTO(typeService.getTypeById(idType)));
+		Intervention intervention = interventionService.convertToEntity(interventionDTO);
+		
+		return interventionService.convertToDTO(interventionService.updateIntervention(intervention));
 	}
 
 }

@@ -28,7 +28,7 @@ public class InterventionAdapter implements Converter<InterventionDTO, Intervent
 		interventionDTO.setEndDate(intervention.getEndDate());
 		interventionDTO.setShortReport(intervention.getShortReport());
 		interventionDTO.setDetailedReport(intervention.getDetailedReport());
-		intervention.setStatus(intervention.getStatus());
+		interventionDTO.setStatus(intervention.getStatus());
 		
 		return interventionDTO;
 	}

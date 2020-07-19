@@ -11,6 +11,8 @@ import it.myalert.adapterConverter.AlarmAdapter;
 import it.myalert.entity.Alarm;
 import it.myalert.exeption.AgentExeption;
 import it.myalert.exeption.AlarmExeption;
+import it.myalert.exeption.CitizenExeption;
+import it.myalert.exeption.InterventionExeption;
 import it.myalert.repository.AlarmRepository;
 import it.myalert.service.AlarmService;
 import it.myalert.service.CitizenService;
@@ -40,6 +42,16 @@ public class AlarmServiceImpl extends AlarmAdapter implements AlarmService {
 	public Alarm addAlarm(Alarm alarm) throws AlarmExeption {
 		alarm.setIdAlarm(null);
 		return alarmRepository.save(alarm);
+	}
+
+	@Override
+	public List<Alarm> getAllAlarmByIdIntervention(int idIntervention) throws InterventionExeption {
+		return this.alarmRepository.findByIntervention_idIntervention(idIntervention);
+	}
+	
+	@Override
+	public List<Alarm> getAllAlarmByIdCitizen(int idCitizen) throws CitizenExeption {
+		return this.alarmRepository.findByCitizen_idCitizen(idCitizen);
 	}
 
 }
