@@ -28,10 +28,10 @@ public class Image implements Serializable {
     private int idImage;
     @Column(name="Url", nullable=false, length=70)
     private String url;
-    @Column(name="Lat", length=15)
-    private String lat;
-    @Column(name="Lon", length=15)
-    private String lon;
+    @Column(name="Lat")
+    private Double lat;
+    @Column(name="Lon")
+    private Double lon;
     @ManyToOne(optional=false)
     @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
@@ -85,7 +85,7 @@ public class Image implements Serializable {
      *
      * @return the current value of lat
      */
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -94,7 +94,7 @@ public class Image implements Serializable {
      *
      * @param aLat the new value for lat
      */
-    public void setLat(String aLat) {
+    public void setLat(Double aLat) {
         lat = aLat;
     }
 
@@ -103,7 +103,7 @@ public class Image implements Serializable {
      *
      * @return the current value of lon
      */
-    public String getLon() {
+    public Double getLon() {
         return lon;
     }
 
@@ -112,7 +112,7 @@ public class Image implements Serializable {
      *
      * @param aLong_ the new value for lon
      */
-    public void setLon(String aLon) {
+    public void setLon(Double aLon) {
         lon = aLon;
     }
 
