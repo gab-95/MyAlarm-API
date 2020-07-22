@@ -17,13 +17,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Version;
 
 @Entity(name="manager")
 public class Manager implements Serializable {
 
     /** Primary key. */
     protected static final String PK = "idManager";
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

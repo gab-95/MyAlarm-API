@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +22,10 @@ public class Assign implements Serializable {
     /** Primary key. */
     protected static final String PK = "idAssign";
 
+
+
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
     private int idAssign;
     @Column(name="Confirm", nullable=false, precision=3)
@@ -35,7 +40,7 @@ public class Assign implements Serializable {
     @JoinColumn(name="idAgent", nullable=false)
     private Agent agent;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
     @ManyToOne(optional=false)
     @JoinColumn(name="idManager", nullable=false)

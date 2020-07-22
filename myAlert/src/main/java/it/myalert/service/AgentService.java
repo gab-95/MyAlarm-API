@@ -14,5 +14,6 @@ public interface AgentService extends Converter<AgentDTO, Agent> {
 	public List<Agent> getAll();
 	public Agent addAgent(Agent agent, int idManager) throws AgentExeption;
 	public Agent getAgentById(int idAgent) throws AgentExeption;
-	public Agent updatePosition(String lat, String lon, int idAgent) throws AgentExeption;
+	public Agent updatePosition(Double lat, Double lon, int idAgent) throws AgentExeption;
+	public Agent updateAgent(Agent agent, int idAgent) throws AgentExeption;
 }

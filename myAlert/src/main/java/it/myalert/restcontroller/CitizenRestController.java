@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.myalert.DTO.CitizenDTO;
-import it.myalert.DTO.ManagerDTO;
-import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Citizen;
-import it.myalert.entity.Manager;
 import it.myalert.exeption.CitizenExeption;
-import it.myalert.exeption.ManagerExeption;
 import it.myalert.service.CitizenService;
 
 @RestController
@@ -67,8 +62,7 @@ public class CitizenRestController {
 	
 	//-----------------ADD CITIZEN ----------------------------------------
 	@PostMapping(value="/addCitizen", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public CitizenDTO post(@RequestBody CitizenDTO citizenDTO) throws CitizenExeption {
-		
+	public CitizenDTO post(@RequestBody CitizenDTO citizenDTO) throws CitizenExeption {	
 			Citizen citizen = citizenService.addCitizen(citizenService.convertToEntity(citizenDTO));
 			return citizenService.convertToDTO(citizen);
 	}
@@ -76,9 +70,18 @@ public class CitizenRestController {
 	
 	//-----------------UPDATE POSITION CITIZEN ----------------------------------------
 	@PutMapping(value="/updatePosition/{idCitizen}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public CitizenDTO updatePosition(@PathVariable("idCitizen") int idCitizen, @RequestParam("lat") String lat, @RequestParam("lon") String lon) throws CitizenExeption {
+	public CitizenDTO updatePosition(@PathVariable("idCitizen") int idCitizen, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws CitizenExeption {
 			System.out.print("parameter:" + idCitizen + lat + lon);
 			Citizen citizen = citizenService.updatePosition(lat, lon, idCitizen);
+			return citizenService.convertToDTO(citizen);
+	}
+	
+	
+	//-----------------UPDATE  CITIZEN ----------------------------------------
+	@PutMapping(value="/updateCitizen/{idCitizen}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public CitizenDTO updateCitizen(@RequestBody CitizenDTO citizenDTO, @PathVariable("idCitizen") int idCitizen) throws CitizenExeption {
+			System.out.print("parameter:" + citizenDTO.toString());
+			Citizen citizen = citizenService.updateCitizen(citizenService.convertToEntity(citizenDTO), idCitizen);
 			return citizenService.convertToDTO(citizen);
 	}
 

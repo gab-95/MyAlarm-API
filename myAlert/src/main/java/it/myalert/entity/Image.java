@@ -21,19 +21,19 @@ public class Image implements Serializable {
     /** Primary key. */
     protected static final String PK = "idImage";
 
-    
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(unique=true, nullable=false, precision=10)
-    private int idImage;
+    @Column(unique=true, nullable=false)
+    private Integer idImage;
     @Column(name="Url", nullable=false, length=70)
     private String url;
-    @Column(name="Lat", length=15)
-    private String lat;
-    @Column(name="Long", length=15)
-    private String long_;
+    @Column(name="Lat")
+    private Double lat;
+    @Column(name="Lon")
+    private Double lon;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
     @ManyToOne(optional=false)
     @JoinColumn(name="idUser", nullable=false)
@@ -49,7 +49,7 @@ public class Image implements Serializable {
      *
      * @return the current value of idImage
      */
-    public int getIdImage() {
+    public Integer getIdImage() {
         return idImage;
     }
 
@@ -58,7 +58,7 @@ public class Image implements Serializable {
      *
      * @param aIdImage the new value for idImage
      */
-    public void setIdImage(int aIdImage) {
+    public void setIdImage(Integer aIdImage) {
         idImage = aIdImage;
     }
 
@@ -85,7 +85,7 @@ public class Image implements Serializable {
      *
      * @return the current value of lat
      */
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -94,26 +94,26 @@ public class Image implements Serializable {
      *
      * @param aLat the new value for lat
      */
-    public void setLat(String aLat) {
+    public void setLat(Double aLat) {
         lat = aLat;
     }
 
     /**
-     * Access method for long_.
+     * Access method for lon.
      *
-     * @return the current value of long_
+     * @return the current value of lon
      */
-    public String getLong_() {
-        return long_;
+    public Double getLon() {
+        return lon;
     }
 
     /**
-     * Setter method for long_.
+     * Setter method for lon.
      *
-     * @param aLong_ the new value for long_
+     * @param aLong_ the new value for lon
      */
-    public void setLong_(String aLong_) {
-        long_ = aLong_;
+    public void setLon(Double aLon) {
+        lon = aLon;
     }
 
     /**

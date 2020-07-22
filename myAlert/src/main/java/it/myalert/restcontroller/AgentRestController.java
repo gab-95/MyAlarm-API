@@ -18,13 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.myalert.DTO.AgentDTO;
-import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
-import it.myalert.entity.Citizen;
 import it.myalert.exeption.AgentExeption;
-import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.service.AgentService;
 import it.myalert.service.ManagerService;
@@ -91,10 +88,19 @@ public class AgentRestController {
 		}
 		
 		//-----------------UPDATE POSITION AGENT ----------------------------------------
-		@PutMapping(value="/updatePosition/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
-		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") String lat, @RequestParam("lon") String lon) throws AgentExeption {
+		@PutMapping(value="/updatePosition/{idAgent}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws AgentExeption {
 				Agent agent = agentService.updatePosition(lat, lon, idAgent);
 				return agentService.convertToDTO(agent);
+		}
+		
+		//-----------------UPDATE  AGENT ----------------------------------------
+		@PutMapping(value="/updateAgent/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public AgentDTO updateManager(@RequestBody AgentDTO agentDTO, @PathVariable("idAgent") int idAgent) throws AgentExeption {
+			System.out.print("parameter:" + agentDTO.toString());
+			
+			Agent agent = agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent);
+			return agentService.convertToDTO(agent);
 		}
 
 }

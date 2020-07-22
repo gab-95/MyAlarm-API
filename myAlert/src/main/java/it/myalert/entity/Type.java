@@ -7,8 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -24,9 +27,12 @@ public class Type implements Serializable {
     /** Primary key. */
     protected static final String PK = "idType";
 
+    
+
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idType;
+    private Integer idType;
     @Column(name="Name", unique=true, nullable=false, length=45)
     private String name;
     @OneToMany(mappedBy="type")
@@ -45,7 +51,7 @@ public class Type implements Serializable {
      *
      * @return the current value of idType
      */
-    public int getIdType() {
+    public Integer getIdType() {
         return idType;
     }
 
@@ -54,7 +60,7 @@ public class Type implements Serializable {
      *
      * @param aIdType the new value for idType
      */
-    public void setIdType(int aIdType) {
+    public void setIdType(Integer aIdType) {
         idType = aIdType;
     }
 

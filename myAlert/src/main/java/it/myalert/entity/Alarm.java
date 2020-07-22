@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,16 +22,19 @@ public class Alarm implements Serializable {
     /** Primary key. */
     protected static final String PK = "idAlarm";
 
+
+
     @Id
-    @Column(unique=true, nullable=false, length=45)
-    private String idAlarm;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(unique=true, nullable=false, precision=10)
+    private Integer idAlarm;
     @Column(name="AlarmDate")
     private Timestamp alarmDate;
     @ManyToOne(optional=false)
     @JoinColumn(name="idCitizen", nullable=false)
     private Citizen citizen;
     @ManyToOne(optional=false)
-    @JoinColumn(name="idIntervation", nullable=false)
+    @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
 
     /** Default constructor. */
@@ -42,7 +47,7 @@ public class Alarm implements Serializable {
      *
      * @return the current value of idAlarm
      */
-    public String getIdAlarm() {
+    public Integer getIdAlarm() {
         return idAlarm;
     }
 
@@ -51,7 +56,7 @@ public class Alarm implements Serializable {
      *
      * @param aIdAlarm the new value for idAlarm
      */
-    public void setIdAlarm(String aIdAlarm) {
+    public void setIdAlarm(Integer aIdAlarm) {
         idAlarm = aIdAlarm;
     }
 
@@ -123,9 +128,7 @@ public class Alarm implements Serializable {
             return false;
         }
         Alarm that = (Alarm) other;
-        Object myIdAlarm = this.getIdAlarm();
-        Object yourIdAlarm = that.getIdAlarm();
-        if (myIdAlarm==null ? yourIdAlarm!=null : !myIdAlarm.equals(yourIdAlarm)) {
+        if (this.getIdAlarm() != that.getIdAlarm()) {
             return false;
         }
         return true;
@@ -152,11 +155,7 @@ public class Alarm implements Serializable {
     public int hashCode() {
         int i;
         int result = 17;
-        if (getIdAlarm() == null) {
-            i = 0;
-        } else {
-            i = getIdAlarm().hashCode();
-        }
+        i = getIdAlarm();
         result = 37*result + i;
         return result;
     }
@@ -181,7 +180,7 @@ public class Alarm implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idAlarm", getIdAlarm());
+        ret.put("idAlarm", Integer.valueOf(getIdAlarm()));
         return ret;
     }
 

@@ -21,8 +21,12 @@ public class AgentAdapter implements Converter<AgentDTO, Agent>{
 		
 		AgentDTO agentDTO = new AgentDTO();
 		agentDTO.setIdAgent(agent.getIdAgent());
-		agentDTO.setUserDTO(userAdapter.convertToDTO(agent.getUser()));
-		agentDTO.setManagerDTO(managerAdapter.convertToDTO(agent.getManager()));
+		if(agent.getUser() != null) {			
+			agentDTO.setUserDTO(userAdapter.convertToDTO(agent.getUser()));
+		}
+		if(agent.getManager() != null) {			
+			agentDTO.setManagerDTO(managerAdapter.convertToDTO(agent.getManager()));
+		}
 		agentDTO.setDepartment(agent.getDepartment());
 		agentDTO.setDepartment_Code(agent.getDepartmentCode());
 		agentDTO.setLat(agent.getLat());
@@ -39,7 +43,9 @@ public class AgentAdapter implements Converter<AgentDTO, Agent>{
 		Agent agent = new Agent();
 		agent.setIdAgent(agentDTO.getIdAgent());
 		agent.setUser(userAdapter.convertToEntity(agentDTO.getUserDTO()));
-		agent.setManager(managerAdapter.convertToEntity(agentDTO.getManagerDTO()));
+		if(agentDTO.getManagerDTO() != null) {			
+			agent.setManager(managerAdapter.convertToEntity(agentDTO.getManagerDTO()));
+		}
 		agent.setDepartment(agentDTO.getDepartment());
 		agent.setDepartmentCode(agentDTO.getDepartment_Code());
 		agent.setLat(agentDTO.getLat());

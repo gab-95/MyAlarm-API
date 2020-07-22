@@ -17,7 +17,9 @@ public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
 		
 		ManagerDTO managerDTO = new ManagerDTO();
 		managerDTO.setIdManager(manager.getIdManager());
-		managerDTO.setUser(convertUser.convertToDTO(manager.getUser()));
+		if(manager.getUser() != null) {			
+			managerDTO.setUser(convertUser.convertToDTO(manager.getUser()));
+		}
 		managerDTO.setStartDate_task(manager.getStartDateTask());
 		managerDTO.setEndDate_task(manager.getEndDateTask());
 		return managerDTO;

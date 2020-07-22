@@ -20,6 +20,7 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 
 	@Autowired
 	private CitizenRepository citizenRepository;
+	
 	@Override
 	public List<Citizen> getAll() {
 		return this.citizenRepository.findAll();
@@ -38,11 +39,17 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 	}
 
 	@Override
-	public Citizen updatePosition(String lat, String lon, int idCitizen) throws CitizenExeption {
+	public Citizen updatePosition(Double lat, Double lon, int idCitizen) throws CitizenExeption {
 		Citizen updatedCitizen = this.citizenRepository.findById(idCitizen).orElseThrow(()-> new CitizenExeption("ERROR: No citizen found with id:"+ idCitizen));
 		updatedCitizen.setLat(lat);
 		updatedCitizen.setLon(lon);
 		return this.citizenRepository.save(updatedCitizen);
+	}
+
+	@Override
+	public Citizen updateCitizen(Citizen citizen, int idCitizen) throws CitizenExeption {
+		//Citizen updatedCitizen = this.citizenRepository.findById(idCitizen).orElseThrow(()-> new CitizenExeption("ERROR: No citizen found with id:"+ idCitizen));
+		return this.citizenRepository.save(citizen);
 	}
 
 }
