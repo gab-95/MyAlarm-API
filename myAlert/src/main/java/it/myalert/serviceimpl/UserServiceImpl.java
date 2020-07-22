@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,5 +90,11 @@ public class UserServiceImpl extends UserAdapter implements UserService  {
 		throw new UserExeption("ERROR: no user found!!");
 	}
 	
+	@Override
+	public User getUserById(int idUser) throws UserExeption {
+		return this.userRepository.findById(idUser).orElseThrow(()-> new UserExeption("ERROR: No citizen found with id:"+ idUser));
+	}
+	
 
 }
+

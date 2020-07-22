@@ -24,8 +24,8 @@ public class Image implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(unique=true, nullable=false, precision=10)
-    private int idImage;
+    @Column(unique=true, nullable=false)
+    private Integer idImage;
     @Column(name="Url", nullable=false, length=70)
     private String url;
     @Column(name="Lat")
@@ -49,7 +49,7 @@ public class Image implements Serializable {
      *
      * @return the current value of idImage
      */
-    public int getIdImage() {
+    public Integer getIdImage() {
         return idImage;
     }
 
@@ -58,7 +58,7 @@ public class Image implements Serializable {
      *
      * @param aIdImage the new value for idImage
      */
-    public void setIdImage(int aIdImage) {
+    public void setIdImage(Integer aIdImage) {
         idImage = aIdImage;
     }
 
