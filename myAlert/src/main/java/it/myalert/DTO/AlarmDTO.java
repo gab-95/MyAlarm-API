@@ -8,6 +8,8 @@ public class AlarmDTO {
 	private CitizenDTO citizen;
 	private InterventionDTO intervention;
 	private Date alarmDate;
+	private String title;
+	private String description;
 	
 	
 	public Integer getIdAlarm() {
@@ -34,6 +36,20 @@ public class AlarmDTO {
 	public void setAlarmDate(Date alarmDate) {
 		this.alarmDate = alarmDate;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 	
 
 }

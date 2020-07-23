@@ -6,6 +6,7 @@ import javax.el.TypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 import it.myalert.DTO.InterventionDTO;
 import it.myalert.entity.Intervention;
 
@@ -43,8 +44,12 @@ public class InterventionAdapter implements Converter<InterventionDTO, Intervent
 		intervention.setLon(interventionDTO.getLon());
 		intervention.setAddress(interventionDTO.getAddress());
 		intervention.setCity(interventionDTO.getCity());
-		intervention.setStartDate(new Timestamp(interventionDTO.getStartDate().getTime()));
-		intervention.setEndDate(new Timestamp(interventionDTO.getEndDate().getTime()));
+		if(interventionDTO.getStartDate() != null) {
+			intervention.setStartDate(new Timestamp(interventionDTO.getStartDate().getTime()));
+		}
+		if(interventionDTO.getEndDate() != null) {
+			intervention.setEndDate(new Timestamp(interventionDTO.getEndDate().getTime()));
+		}
 		intervention.setShortReport(interventionDTO.getShortReport());
 		intervention.setDetailedReport(interventionDTO.getDetailedReport());
 		intervention.setStatus(interventionDTO.getStatus());

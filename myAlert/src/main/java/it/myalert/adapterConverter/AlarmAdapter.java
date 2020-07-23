@@ -24,6 +24,8 @@ public class AlarmAdapter implements Converter<AlarmDTO, Alarm> {
 		alarmDTO.setCitizen(citizenAdapter.convertToDTO(alarm.getCitizen()));
 		alarmDTO.setIntervention(interventionAdapter.convertToDTO(alarm.getIntervention()));
 		alarmDTO.setAlarmDate(new Date(alarm.getAlarmDate().getTime()));
+		alarmDTO.setTitle(alarm.getTitle());
+		alarmDTO.setDescription(alarm.getDescription());
 		return alarmDTO;
 	}
 
@@ -35,6 +37,8 @@ public class AlarmAdapter implements Converter<AlarmDTO, Alarm> {
 		alarm.setCitizen(citizenAdapter.convertToEntity(alarmDTO.getCitizen()));
 		alarm.setIntervention(interventionAdapter.convertToEntity(alarmDTO.getIntervention()));
 		alarm.setAlarmDate(new Timestamp(alarmDTO.getAlarmDate().getTime()));
+		alarm.setTitle(alarmDTO.getTitle());
+		alarm.setDescription(alarmDTO.getDescription());
 		return alarm;
 	}
 

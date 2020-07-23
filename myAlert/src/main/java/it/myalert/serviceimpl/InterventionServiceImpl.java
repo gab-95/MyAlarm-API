@@ -50,4 +50,9 @@ public class InterventionServiceImpl extends InterventionAdapter implements Inte
 		return this.interventionRepository.save(intervention);
 	}
 
+	@Override
+	public List<Intervention> getByStatusOrderByStartdate(String status) throws InterventionExeption {
+		return this.interventionRepository.findByStatusOrderByStartDate(status);
+	}
+
 }

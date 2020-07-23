@@ -36,6 +36,10 @@ public class Alarm implements Serializable {
     @ManyToOne(optional=false)
     @JoinColumn(name="idIntervention", nullable=false)
     private Intervention intervention;
+    @Column(name="Title", length=200)
+    private String title;
+    @Column(name="Description", length=16777215)
+    private String description;
 
     /** Default constructor. */
     public Alarm() {
@@ -113,6 +117,42 @@ public class Alarm implements Serializable {
     public void setIntervention(Intervention aIntervention) {
         intervention = aIntervention;
     }
+    
+    /**
+     * Access method for title.
+     *
+     * @return the current value of title
+     */
+    public String getTitle() {
+		return title;
+	}
+
+    /**
+     * Setter method for title.
+     *
+     * @param aTitle the new value for title
+     */
+	public void setTitle(String aTitle) {
+		this.title = aTitle;
+	}
+	
+	/**
+     * Access method for description.
+     *
+     * @return the current value of description
+     */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+     * Setter method for description.
+     *
+     * @param aDescription the new value for description
+     */
+	public void setDescription(String aDescription) {
+		this.description = aDescription;
+	}
 
     /**
      * Compares the key for this instance with another Alarm.

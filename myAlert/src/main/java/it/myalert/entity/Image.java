@@ -26,7 +26,7 @@ public class Image implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false)
     private Integer idImage;
-    @Column(name="Url", nullable=false, length=70)
+    @Column(name="Url", nullable=false, length=16777215)
     private String url;
     @Column(name="Lat")
     private Double lat;

@@ -12,5 +12,6 @@ public interface InterventionRepository extends JpaRepository<Intervention, Inte
 
 	
 	public List<Intervention> findByStatusAndType_idType(String status, int idType);
+	public List<Intervention> findByStatusOrderByStartDate(String status);
 
 }

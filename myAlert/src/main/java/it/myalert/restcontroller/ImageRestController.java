@@ -114,15 +114,25 @@ public class ImageRestController {
 	
 	//-----------------ADD IMAGE ----------------------------------------
 	@PostMapping(value="/addImage", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ImageDTO postImage(@RequestParam("idUser") int idUser, @RequestParam("idIntervention") int idIntervention, @RequestBody ImageDTO imageDTO) throws InterventionExeption, UserExeption {
+	public List<ImageDTO> postImage(@RequestParam("idUser") int idUser, @RequestParam("idIntervention") int idIntervention, @RequestBody List<ImageDTO> listDTO) throws InterventionExeption, UserExeption {
 		
-		UserDTO userDTO = userService.convertToDTO(userService.getUserById(idUser));
-		InterventionDTO interventionDTO = interventionService.convertToDTO(interventionService.getById(idIntervention));
-		imageDTO.setUser(userDTO);
-		imageDTO.setIntervention(interventionDTO);
+		Iterator<ImageDTO> listDTOIterator = listDTO.iterator();
+		List<ImageDTO> newlistDTO = new ArrayList<ImageDTO>();
 		
-		Image image = imageService.addImage(imageService.convertToEntity(imageDTO));
-		return imageService.convertToDTO(image);
+		while(listDTOIterator.hasNext()) {
+			
+			ImageDTO imageDTO = listDTOIterator.next();
+			UserDTO userDTO = userService.convertToDTO(userService.getUserById(idUser));
+			InterventionDTO interventionDTO = interventionService.convertToDTO(interventionService.getById(idIntervention));
+			imageDTO.setUser(userDTO);
+			imageDTO.setIntervention(interventionDTO);
+			
+			Image image = imageService.addImage(imageService.convertToEntity(imageDTO));
+			newlistDTO.add(imageService.convertToDTO(image));
+	
+		}
+
+		return newlistDTO;
 	}
 	
 	//-----------------DELETE  IMAGE ----------------------------------------

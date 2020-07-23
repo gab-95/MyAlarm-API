@@ -101,7 +101,7 @@ public class InterventionRestController {
 			//calc dist from current intervention and listInterventionIT already saved
 			Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
 			if( distance > limit) {
-				System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ listInterventionIT.next().getIdIntervention());
+				System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ InterventionIT.getIdIntervention());
 				intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
 			}else {
 				intervention = InterventionIT;
@@ -136,8 +136,27 @@ public class InterventionRestController {
 		}
 	}
 	
-	
-	//-----------------UPDATE  TYPE ----------------------------------------
+	//-----------------GET INTERVENTION BY status ----------------------------------------
+	@GetMapping(value="/getInterventionByStatus/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<InterventionDTO> getByStatusOrderByStartdate(@PathVariable("status") String status) throws InterventionExeption{
+		
+		Iterator<Intervention> intervention = interventionService.getByStatusOrderByStartdate(status).iterator();
+		List<InterventionDTO> listDTO = new ArrayList<InterventionDTO>();
+		
+		while(intervention.hasNext()) {
+			
+			listDTO.add(interventionService.convertToDTO(intervention.next()));
+		}
+		
+		if(listDTO.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return listDTO;
+		
+	}
+			
+	//-----------------UPDATE  INTERVENTION ----------------------------------------
 	@PutMapping(value="/updateIntervention/{idIntervention}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public InterventionDTO updateIntervention(@PathVariable("idIntervention") int idIntervention, @RequestBody InterventionDTO interventionDTO, @RequestParam("idType")int idType) throws InterventionExeption, TypeExeption {	
 		
