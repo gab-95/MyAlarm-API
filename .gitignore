@@ -24,3 +24,5 @@ hs_err_pid*
 
 Servers
 .metadata
+
+myAlert\bin\main\application.properties
