@@ -58,16 +58,11 @@ public class AgentRestController {
 		
 		//------------------GET AGENT FROM idAgent------------------------------------
 		@GetMapping(value="/getAgent/{idAgent}", produces=MediaType.APPLICATION_JSON_VALUE)
-		public ResponseBean getAgentById(@PathVariable("idAgent") int idAgent){
+		public AgentDTO getAgentById(@PathVariable("idAgent") int idAgent) throws AgentExeption{
 			
-			try {
-				Agent agent = this.agentService.getAgentById(idAgent);
-				return ResponseBean.okResponse(agentService.convertToDTO(agent));	
-			}catch (Exception e) {
-				return ResponseBean.koResponseBean(null, e.getMessage());
-			}
-			
-			
+			Agent agent = this.agentService.getAgentById(idAgent);
+			return this.agentService.convertToDTO(agent);	
+	
 		}
 				
 		

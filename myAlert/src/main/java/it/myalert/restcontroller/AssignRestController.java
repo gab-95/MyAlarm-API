@@ -2,6 +2,7 @@ package it.myalert.restcontroller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -104,8 +105,13 @@ public class AssignRestController {
 		InterventionDTO interventionDTO = this.interventionService.convertToDTO(this.interventionService.getById(idIntervention));
 		assignDTO.setManager(managerDTO);
 		assignDTO.setAgent(agentDTO);
+		interventionDTO.setStatus("assigned");
+		interventionDTO.setStartDate(new Date());
 		assignDTO.setIntervention(interventionDTO);
 		Assign assign = this.assignService.convertToEntity(assignDTO);
+		//update intervention status & start date
+		this.interventionService.updateIntervention(this.interventionService.convertToEntity(interventionDTO));
+		
 		
 		return this.assignService.convertToDTO(this.assignService.assignAgentToIntervention(assign));
 		

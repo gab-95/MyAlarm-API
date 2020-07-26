@@ -17,4 +17,5 @@ public interface InterventionService extends Converter<InterventionDTO, Interven
 	public Intervention updateIntervention(Intervention intervention) throws InterventionExeption;
 	public List<Intervention> getByStatusOrderByStartdate(String status) throws InterventionExeption;
 	public Boolean deleteIntervention(int idIntervention) throws InterventionExeption;
+
 }
