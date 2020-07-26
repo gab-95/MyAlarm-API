@@ -56,7 +56,7 @@ public class TypeServiceImpl extends TypeAdapter implements TypeService {
 			this.typeRepository.delete(type);
 			return true;
 		}
-		return null;
+		return false;
 	}
 
 	

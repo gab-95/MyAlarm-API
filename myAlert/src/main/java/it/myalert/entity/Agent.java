@@ -38,8 +38,8 @@ public class Agent implements Serializable {
     private Double lat;
     @Column(name="Lon")
     private Double lon;
-    @Column(name="StartDate_tsk")
-    private Timestamp startDateTsk;
+    @Column(name="StartDate_task")
+    private Timestamp startDateTask;
     @Column(name="EndDate_task")
     private Timestamp endDateTask;
     @ManyToOne(optional=false)
@@ -147,21 +147,21 @@ public class Agent implements Serializable {
     }
 
     /**
-     * Access method for startDateTsk.
+     * Access method for startDateTask.
      *
-     * @return the current value of startDateTsk
+     * @return the current value of startDateTask
      */
-    public Timestamp getStartDateTsk() {
-        return startDateTsk;
+    public Timestamp getStartDateTask() {
+        return startDateTask;
     }
 
     /**
-     * Setter method for startDateTsk.
+     * Setter method for startDateTask.
      *
-     * @param aStartDateTsk the new value for startDateTsk
+     * @param aStartDateTsk the new value for startDateTask
      */
-    public void setStartDateTsk(Timestamp aStartDateTsk) {
-        startDateTsk = aStartDateTsk;
+    public void setStartDateTask(Timestamp aStartDateTask) {
+        startDateTask = aStartDateTask;
     }
 
     /**

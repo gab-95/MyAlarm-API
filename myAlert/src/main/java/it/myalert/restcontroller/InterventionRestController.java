@@ -157,7 +157,7 @@ public class InterventionRestController {
 	}
 			
 	//-----------------UPDATE  INTERVENTION ----------------------------------------
-	@PutMapping(value="/updateIntervention/{idIntervention}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value="/updateIntervention/{idIntervention}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public InterventionDTO updateIntervention(@PathVariable("idIntervention") int idIntervention, @RequestBody InterventionDTO interventionDTO, @RequestParam("idType")int idType) throws InterventionExeption, TypeExeption {	
 		
 		

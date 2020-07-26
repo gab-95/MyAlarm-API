@@ -8,6 +8,7 @@ import it.myalert.DTO.ImageDTO;
 import it.myalert.adapterConverter.Converter;
 import it.myalert.entity.Image;
 import it.myalert.entity.Type;
+import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ImageExeption;
 import it.myalert.exeption.InterventionExeption;
 import it.myalert.exeption.ManagerExeption;
@@ -21,5 +22,6 @@ public interface ImageService extends Converter<ImageDTO, Image> {
 	public List<Image> findByIntervention_idInterventionAndUser_idUser(int idIntervention, int idUser) throws InterventionExeption,UserException;
 	public Image addImage(Image image) throws UserExeption;
 	public Boolean deleteImage(int idImage) throws ImageExeption;
+	public Boolean deleteImageByIdCitizen(int idCitizen) throws CitizenExeption;
 
 }

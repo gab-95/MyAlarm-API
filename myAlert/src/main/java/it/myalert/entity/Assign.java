@@ -27,14 +27,14 @@ public class Assign implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false, precision=10)
-    private int idAssign;
+    private Integer idAssign;
     @Column(name="Confirm", nullable=false, precision=3)
-    private short confirm;
+    private Boolean confirm;
     @Column(name="HasWritten", nullable=false, precision=3)
-    private short hasWritten;
-    @Column(name="Start_validate")
+    private Boolean hasWritten;
+    @Column(name="StartValidate")
     private Timestamp startValidate;
-    @Column(name="End_validate")
+    @Column(name="EndValidate")
     private Timestamp endValidate;
     @ManyToOne(optional=false)
     @JoinColumn(name="idAgent", nullable=false)
@@ -56,7 +56,7 @@ public class Assign implements Serializable {
      *
      * @return the current value of idAssign
      */
-    public int getIdAssign() {
+    public Integer getIdAssign() {
         return idAssign;
     }
 
@@ -65,7 +65,7 @@ public class Assign implements Serializable {
      *
      * @param aIdAssign the new value for idAssign
      */
-    public void setIdAssign(int aIdAssign) {
+    public void setIdAssign(Integer aIdAssign) {
         idAssign = aIdAssign;
     }
 
@@ -74,7 +74,7 @@ public class Assign implements Serializable {
      *
      * @return the current value of confirm
      */
-    public short getConfirm() {
+    public Boolean getConfirm() {
         return confirm;
     }
 
@@ -83,7 +83,7 @@ public class Assign implements Serializable {
      *
      * @param aConfirm the new value for confirm
      */
-    public void setConfirm(short aConfirm) {
+    public void setConfirm(Boolean aConfirm) {
         confirm = aConfirm;
     }
 
@@ -92,7 +92,7 @@ public class Assign implements Serializable {
      *
      * @return the current value of hasWritten
      */
-    public short getHasWritten() {
+    public Boolean getHasWritten() {
         return hasWritten;
     }
 
@@ -101,7 +101,7 @@ public class Assign implements Serializable {
      *
      * @param aHasWritten the new value for hasWritten
      */
-    public void setHasWritten(short aHasWritten) {
+    public void setHasWritten(Boolean aHasWritten) {
         hasWritten = aHasWritten;
     }
 

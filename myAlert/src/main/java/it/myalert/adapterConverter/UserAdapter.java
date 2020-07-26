@@ -10,12 +10,6 @@ import it.myalert.entity.User;
 
 public class UserAdapter implements Converter<UserDTO, User> {
 
-	@Autowired
-	AgentAdapter agentConverter;
-	@Autowired
-	ManagerAdapter managerConverter;
-	@Autowired
-	CitizenAdapter citizenConverter;
 	@Override
 	public UserDTO convertToDTO(User user) {
 		

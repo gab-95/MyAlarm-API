@@ -14,5 +14,6 @@ public interface ImageRepository extends JpaRepository<Image, Integer>{
 	
 	public List<Image> findByIntervention_idIntervention(int idIntervention);
 	public List<Image> findByIntervention_idInterventionAndUser_idUser(int idIntervention, int idUser);
+	public int deleteByUser_idUser(int idUser);
 
 }

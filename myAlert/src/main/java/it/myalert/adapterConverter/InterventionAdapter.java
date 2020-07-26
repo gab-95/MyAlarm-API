@@ -13,14 +13,14 @@ import it.myalert.entity.Intervention;
 public class InterventionAdapter implements Converter<InterventionDTO, Intervention>{
 
 	@Autowired
-	private TypeAdapter typeConverter ;
+	private TypeAdapter typeAdapter ;
 	
 	@Override
 	public InterventionDTO convertToDTO(Intervention intervention) {
 
 		InterventionDTO interventionDTO = new InterventionDTO();
 		interventionDTO.setIdIntervention(intervention.getIdIntervention());
-		interventionDTO.setType(typeConverter.convertToDTO(intervention.getType()));
+		interventionDTO.setType(typeAdapter.convertToDTO(intervention.getType()));
 		interventionDTO.setLat(intervention.getLat());
 		interventionDTO.setLon(intervention.getLon());
 		interventionDTO.setAddress(intervention.getAddress());
@@ -39,7 +39,7 @@ public class InterventionAdapter implements Converter<InterventionDTO, Intervent
 
 		Intervention intervention = new Intervention();
 		intervention.setIdIntervention(interventionDTO.getIdIntervention());
-		intervention.setType(typeConverter.convertToEntity(interventionDTO.getType()));
+		intervention.setType(typeAdapter.convertToEntity(interventionDTO.getType()));
 		intervention.setLat(interventionDTO.getLat());
 		intervention.setLon(interventionDTO.getLon());
 		intervention.setAddress(interventionDTO.getAddress());

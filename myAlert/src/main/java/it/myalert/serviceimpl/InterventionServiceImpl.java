@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 
 import it.myalert.adapterConverter.InterventionAdapter;
+import it.myalert.entity.Image;
 import it.myalert.entity.Intervention;
 import it.myalert.entity.Type;
+import it.myalert.exeption.ImageExeption;
 import it.myalert.exeption.InterventionExeption;
 import it.myalert.exeption.TypeExeption;
 import it.myalert.repository.InterventionRepository;
@@ -54,5 +56,17 @@ public class InterventionServiceImpl extends InterventionAdapter implements Inte
 	public List<Intervention> getByStatusOrderByStartdate(String status) throws InterventionExeption {
 		return this.interventionRepository.findByStatusOrderByStartDate(status);
 	}
+
+	@Override
+	public Boolean deleteIntervention(int idIntervention) throws InterventionExeption {
+		
+		Intervention intervention = this.interventionRepository.findById(idIntervention).orElseThrow(()-> new InterventionExeption("ERROR: No intervention found with id:"+ idIntervention));
+		if(intervention != null) {
+			this.interventionRepository.delete(intervention);
+			return true;
+		}
+		return false;
+	}
+
 
 }

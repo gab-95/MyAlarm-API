@@ -2,6 +2,7 @@ package it.myalert.serviceimpl;
 
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding.Style;
 import javax.transaction.Transactional;
 
 import org.omg.CORBA.UserException;
@@ -13,6 +14,7 @@ import it.myalert.entity.Citizen;
 import it.myalert.entity.Image;
 import it.myalert.entity.Intervention;
 import it.myalert.entity.Type;
+import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ImageExeption;
 import it.myalert.exeption.InterventionExeption;
 import it.myalert.exeption.ManagerExeption;
@@ -59,7 +61,14 @@ public class ImageServiceImpl extends ImageAdapter implements ImageService {
 			this.imageRepository.delete(image);
 			return true;
 		}
-		return null;
+		return false;
+	}
+
+	@Override
+	public Boolean deleteImageByIdCitizen(int idUser) throws CitizenExeption {
+		int num = this.imageRepository.deleteByUser_idUser(idUser);
+		System.out.print("numero eliminati: "+num);
+		return true;
 	}
 
 }

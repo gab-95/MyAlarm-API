@@ -8,7 +8,7 @@ import it.myalert.entity.Citizen;
 public class CitizenAdapter implements Converter<CitizenDTO, Citizen>{
 
 	@Autowired
-	UserAdapter convertUser;
+	UserAdapter userAdapter;
 	
 	@Override
 	public CitizenDTO convertToDTO(Citizen citizen) {
@@ -16,7 +16,7 @@ public class CitizenAdapter implements Converter<CitizenDTO, Citizen>{
 		CitizenDTO citizenDTO = new CitizenDTO();
 		citizenDTO.setIdCitizen(citizen.getIdCitizen());
 		if(citizen.getUser() != null) {
-			citizenDTO.setUserDTO(convertUser.convertToDTO(citizen.getUser()));
+			citizenDTO.setUserDTO(userAdapter.convertToDTO(citizen.getUser()));
 		}
 		citizenDTO.setLat(citizen.getLat());
 		citizenDTO.setLon(citizen.getLon());
@@ -28,7 +28,7 @@ public class CitizenAdapter implements Converter<CitizenDTO, Citizen>{
 
 		Citizen citizen = new Citizen();
 		citizen.setIdCitizen(citizenDTO.getIdCitizen());
-		citizen.setUser(convertUser.convertToEntity(citizenDTO.getUserDTO()));
+		citizen.setUser(userAdapter.convertToEntity(citizenDTO.getUserDTO()));
 		citizen.setLat(citizenDTO.getLat());
 		citizen.setLon(citizenDTO.getLon());
 		return citizen;
