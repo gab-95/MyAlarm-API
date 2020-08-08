@@ -23,6 +23,7 @@ public class UserAdapter implements Converter<UserDTO, User> {
 		userDTO.setAddress(user.getAdress());
 		userDTO.setCity(user.getCity());
 		userDTO.setCountry(user.getCountry());
+		userDTO.setPushId(user.getPushId());
 		return userDTO;
 	}
 
@@ -39,6 +40,7 @@ public class UserAdapter implements Converter<UserDTO, User> {
 		user.setAdress(userDTO.getAddress());
 		user.setCity(userDTO.getCity());
 		user.setCountry(userDTO.getCountry());
+		user.setPushId(userDTO.getPushId());
 		return user;
 	}
 

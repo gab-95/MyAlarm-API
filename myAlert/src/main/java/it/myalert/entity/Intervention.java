@@ -57,6 +57,8 @@ public class Intervention implements Serializable {
     private Set<Alarm> alarm;
     @OneToMany(mappedBy="intervention")
     private Set<Image> image;
+    @Column(name="Count")
+    private int count;
 
     /** Default constructor. */
     public Intervention() {
@@ -314,8 +316,26 @@ public class Intervention implements Serializable {
     public void setImage(Set<Image> aImage) {
         image = aImage;
     }
-
+    
     /**
+     * Access method for count.
+     *
+     * @return the current value of count
+     */
+    public int getCount() {
+		return count;
+	}
+   
+    /**
+     * Setter method for image.
+     *
+     * @param aCount the new value for count
+     */
+	public void setCount(int aCount) {
+		count = aCount;
+	}
+
+	/**
      * Compares the key for this instance with another Intervention.
      *
      * @param other The object to compare to

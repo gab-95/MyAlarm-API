@@ -26,6 +26,7 @@ public class UserDTO {
 	private String city;
 	@NotEmpty
 	private String country;
+	private String pushId;
 	
 	
 	public Integer getIdUser() {
@@ -83,6 +84,13 @@ public class UserDTO {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	public String getPushId() {
+		return pushId;
+	}
+	public void setPushId(String pushId) {
+		this.pushId = pushId;
+	}
+	
 	
 	
 	

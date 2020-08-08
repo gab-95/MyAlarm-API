@@ -15,6 +15,7 @@ public class InterventionDTO {
 	private String shortReport;
 	private String detailedReport;
 	private String status;
+	private int count;
 	
 	
 	public Integer getIdIntervention() {
@@ -83,5 +84,12 @@ public class InterventionDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 
 }

@@ -41,7 +41,7 @@ public class AssignAdapter implements Converter<AssignDTO, Assign>{
 		assign.setAgent(agentAdapter.convertToEntity(assignDTO.getAgent()));
 		assign.setConfirm(assignDTO.getConfirm());
 		assign.setHasWritten(assignDTO.getHasWritten());
-		if(assignDTO.getStartValiDate() != null) assign.setStartValidate(new Timestamp(assignDTO.getStartValiDate().getTime()));
+		if(assignDTO.getStartValidate() != null) assign.setStartValidate(new Timestamp(assignDTO.getStartValidate().getTime()));
 		if(assignDTO.getEndValidate() != null) assign.setEndValidate(new Timestamp(assignDTO.getEndValidate().getTime()));
 		assign.setIntervention(interventionAdapter.convertToEntity(assignDTO.getIntervention()));
 		return assign;

@@ -13,6 +13,7 @@ import it.myalert.entity.User;
 import it.myalert.exeption.AgentExeption;
 import it.myalert.repository.AgentRepository;
 import it.myalert.repository.ManagerRepository;
+import it.myalert.repository.UserRepository;
 import it.myalert.service.AgentService;
 
 @Service
@@ -23,6 +24,8 @@ public class AgentServiceImpl extends AgentAdapter implements AgentService {
 	private AgentRepository agentRepository;
 	@Autowired
 	private ManagerRepository managerRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	
 	@Override
@@ -53,12 +56,14 @@ public class AgentServiceImpl extends AgentAdapter implements AgentService {
 		Agent updatedAgent = this.agentRepository.findById(idAgent).orElseThrow(()-> new AgentExeption("ERROR: No agent found with id:"+ idAgent));
 		updatedAgent.setLat(lat);
 		updatedAgent.setLon(lon);
-		return updatedAgent;
+		return this.agentRepository.save(updatedAgent);
 	}
 
 	@Override
 	public Agent updateAgent(Agent agent, int idAgent) throws AgentExeption {
 		Agent agent2 = this.agentRepository.findById(idAgent).orElseThrow(()-> new AgentExeption("ERROR: No agent found with id:"+ idAgent));
+
+		agent.setUser(this.userRepository.save(agent.getUser()));
 		agent.setManager(agent2.getManager());
 		return this.agentRepository.save(agent);
 	}

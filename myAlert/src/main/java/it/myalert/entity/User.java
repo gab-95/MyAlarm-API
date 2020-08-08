@@ -47,6 +47,8 @@ public class User implements Serializable {
     private String city;
     @Column(name="Country", nullable=false, length=45)
     private String country;
+    @Column(name="PushId", length=45)
+    private String pushId;
     @OneToMany(mappedBy="user")
     private Set<Agent> agent;
     @OneToMany(mappedBy="user")
@@ -221,6 +223,24 @@ public class User implements Serializable {
      */
     public void setCountry(String aCountry) {
         country = aCountry;
+    }
+    
+    /**
+     * Access method for pushId.
+     *
+     * @return the current value of pushId
+     */
+    public String getPushId() {
+        return pushId;
+    }
+
+    /**
+     * Setter method for pushId.
+     *
+     * @param aPushId the new value for pushId
+     */
+    public void setPushId(String aPushId) {
+        pushId = aPushId;
     }
 
     /**

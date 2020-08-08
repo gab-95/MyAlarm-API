@@ -12,6 +12,7 @@ import it.myalert.entity.Citizen;
 import it.myalert.exeption.AgentExeption;
 import it.myalert.exeption.CitizenExeption;
 import it.myalert.repository.CitizenRepository;
+import it.myalert.repository.UserRepository;
 import it.myalert.service.CitizenService;
 
 @Service
@@ -20,6 +21,8 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 
 	@Autowired
 	private CitizenRepository citizenRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	public List<Citizen> getAll() {
@@ -47,8 +50,9 @@ public class CitizenServiceImpl  extends CitizenAdapter implements CitizenServic
 	}
 
 	@Override
-	public Citizen updateCitizen(Citizen citizen, int idCitizen) throws CitizenExeption {
+	public Citizen updateCitizen(Citizen citizen) throws CitizenExeption {
 		//Citizen updatedCitizen = this.citizenRepository.findById(idCitizen).orElseThrow(()-> new CitizenExeption("ERROR: No citizen found with id:"+ idCitizen));
+		citizen.setUser(this.userRepository.save(citizen.getUser()));
 		return this.citizenRepository.save(citizen);
 	}
 

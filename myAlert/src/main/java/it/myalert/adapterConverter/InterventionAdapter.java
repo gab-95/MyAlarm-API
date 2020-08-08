@@ -30,7 +30,7 @@ public class InterventionAdapter implements Converter<InterventionDTO, Intervent
 		interventionDTO.setShortReport(intervention.getShortReport());
 		interventionDTO.setDetailedReport(intervention.getDetailedReport());
 		interventionDTO.setStatus(intervention.getStatus());
-		
+		interventionDTO.setCount(intervention.getCount());
 		return interventionDTO;
 	}
 
@@ -53,7 +53,7 @@ public class InterventionAdapter implements Converter<InterventionDTO, Intervent
 		intervention.setShortReport(interventionDTO.getShortReport());
 		intervention.setDetailedReport(interventionDTO.getDetailedReport());
 		intervention.setStatus(interventionDTO.getStatus());
-		
+		intervention.setCount(interventionDTO.getCount());
 		return intervention;
 	}
 

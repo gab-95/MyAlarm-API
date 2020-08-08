@@ -42,7 +42,7 @@ public class AssignDTO {
 	public void setHasWritten(Boolean hasWritten) {
 		this.hasWritten = hasWritten;
 	}
-	public Date getStartValiDate() {
+	public Date getStartValidate() {
 		return startValidate;
 	}
 	public void setStartValidate(Date startValidate) {

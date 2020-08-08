@@ -91,11 +91,9 @@ public class AgentRestController {
 		
 		//-----------------UPDATE  AGENT ----------------------------------------
 		@PutMapping(value="/updateAgent/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
-		public AgentDTO updateManager(@RequestBody AgentDTO agentDTO, @PathVariable("idAgent") int idAgent) throws AgentExeption {
-			System.out.print("parameter:" + agentDTO.toString());
-			
-			Agent agent = agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent);
-			return agentService.convertToDTO(agent);
+		public AgentDTO updateAgent(@RequestBody AgentDTO agentDTO, @PathVariable("idAgent") int idAgent) throws AgentExeption {
+			//agentDTO.setManagerDTO(this.managerService.convertToDTO(this.agentService.getAgentById(idAgent).getManager())); 
+			return agentService.convertToDTO(agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent));
 		}
 
 }

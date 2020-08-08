@@ -18,4 +18,5 @@ public interface AssignService extends Converter<AssignDTO, Assign>{
 	public List<Assign> getAssignByIdAgent(int idAgent) throws AgentExeption;
 	public Assign assignAgentToIntervention(Assign assign);
 	public Assign updateAssign(Assign assign) throws AssignExeption;
+	public List<Assign> getAllAssignAndOrderByFieldName(int idAgent, String fieldName) throws AgentExeption, AssignExeption;
 }

@@ -11,13 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import it.myalert.DTO.AgentDTO;
 import it.myalert.DTO.CitizenDTO;
 import it.myalert.DTO.UserDTO;
+import it.myalert.entity.Agent;
 import it.myalert.entity.Citizen;
 import it.myalert.entity.User;
 import it.myalert.exeption.AgentExeption;
@@ -63,12 +66,13 @@ public class UserRestController {
 	
 	//-----------------GET USER BY IDUSER ----------------------------------------
 	@GetMapping(value="/getUserById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO getUserById(@PathVariable int id) throws UserExeption{
+	public UserDTO getUserById(@PathVariable int id) throws UserExeption {
 		
 		User user = userService.getUserById(id);
 		UserDTO userDTO = userService.convertToDTO(user);
 		return userDTO;
 		
 	}
+	
 
 }

@@ -48,8 +48,14 @@ public class AssignServiceImpl extends AssignAdapter implements AssignService{
 
 	@Override
 	public Assign updateAssign(Assign assign) throws AssignExeption {
-		
 		return this.assignRepository.save(assign);
+	}
+
+	@Override
+	public List<Assign> getAllAssignAndOrderByFieldName(int idAgent, String fieldName)throws AgentExeption, AssignExeption {
+		//List<Assign> list = this.assignRepository.getAssignAgentAndOrderByField(idAgent, fieldName);
+		List<Assign> list = this.assignRepository.findByAgent_idAgentOrderByStartValidateDesc(idAgent);
+		return list;
 	}
 
 }

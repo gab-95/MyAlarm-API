@@ -126,6 +126,7 @@ public class AlarmRestController {
 		List<Intervention> list= interventionService.getAllInterventionByStatusAndType(idType, "signaled");
 		//check if not exist other intervention
 		if(list.size() == 0) {
+			interventionDTO.setCount(1);
 			intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
 		}
 		else {
@@ -136,9 +137,11 @@ public class AlarmRestController {
 				Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
 				if( distance > limit) {
 					System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ InterventionIT.getIdIntervention());
+					interventionDTO.setCount(1);
 					intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
 				}else {
-					intervention = InterventionIT;
+					InterventionIT.setCount(InterventionIT.getCount()+1);
+					intervention = this.interventionService.updateIntervention(InterventionIT);
 				}
 
 			}
@@ -171,6 +174,10 @@ public class AlarmRestController {
 			if(canDeleteIntervention) {
 				status = this.interventionService.deleteIntervention(alarmDTO.getIntervention().getIdIntervention());
 			}
+			// decrement count of intervention and update it
+			alarmDTO.getIntervention().setCount(alarmDTO.getIntervention().getCount()-1);
+			this.interventionService.updateIntervention(this.interventionService.convertToEntity(alarmDTO.getIntervention()));
+			// delete alarm signaled by user
 			status= this.alarmService.deleteAlarm(idAlarm);
 			status = this.imageService.deleteImageByIdCitizen(alarmDTO.getCitizen().getUserDTO().getIdUser());
 			return ResponseBean.okResponse(status);	

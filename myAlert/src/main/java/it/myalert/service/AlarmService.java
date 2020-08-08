@@ -17,4 +17,5 @@ public interface AlarmService extends Converter<AlarmDTO, Alarm> {
 	public List<Alarm> getAllAlarmByIdIntervention(int idIntervention) throws InterventionExeption;
 	public List<Alarm> getAllAlarmByIdCitizen(int idCitizen) throws CitizenExeption;
 	public Boolean deleteAlarm(int idAlarm) throws AlarmExeption;
+	
 }
