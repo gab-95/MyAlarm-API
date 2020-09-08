@@ -56,7 +56,7 @@ public class TypeRestController {
 	}
 	
 	
-	//-----------------GET CITIZEN BY idCitizen ----------------------------------------
+	//-----------------GET TYPE BY idType ----------------------------------------
 	@GetMapping(value="/getTypeById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public TypeDTO getTypeById(@PathVariable int id) throws TypeExeption{
 		
@@ -67,7 +67,7 @@ public class TypeRestController {
 	
 		
 	
-	//-----------------ADD CITIZEN ----------------------------------------
+	//-----------------ADD TYPE ----------------------------------------
 	@PostMapping(value="/addType/{idManager}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public TypeDTO post(@PathVariable("idManager") int idManager, @RequestParam("name") String name) throws ManagerExeption {
 		

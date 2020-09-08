@@ -64,6 +64,27 @@ public class AgentRestController {
 			return this.agentService.convertToDTO(agent);	
 	
 		}
+		
+		//------------------GET AGENT FROM coords AND distance ------------------------------------
+		@GetMapping(value="/getAgentByPosition", produces=MediaType.APPLICATION_JSON_VALUE)
+		public List<AgentDTO> getAgentByPosition(@RequestParam("lat") double lat, @RequestParam("lon") double lon, @RequestParam("distance") int distance) throws AgentExeption{
+			
+			List<AgentDTO> listDTO = new ArrayList<AgentDTO>();
+			
+			Iterator<Agent> agentIT = this.agentService.getAll().iterator();
+			while(agentIT.hasNext()) {
+				Agent agent = agentIT.next();
+				//calc distance between agent position and coords of intervention passed as argument
+				Double distanceCalc = this.distance(agent.getLat(), agent.getLon(), lat, lon);
+				if(distanceCalc < distance) {
+					//add agent to list
+					listDTO.add(this.agentService.convertToDTO(agent));
+				}
+			}
+			
+			return listDTO;
+	
+		}
 				
 		
 		//-----------------ADD AGENT FROM idManager----------------------------------------
@@ -94,6 +115,25 @@ public class AgentRestController {
 		public AgentDTO updateAgent(@RequestBody AgentDTO agentDTO, @PathVariable("idAgent") int idAgent) throws AgentExeption {
 			//agentDTO.setManagerDTO(this.managerService.convertToDTO(this.agentService.getAgentById(idAgent).getManager())); 
 			return agentService.convertToDTO(agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent));
+		}
+		
+		
+		
+		// GET DISTANCE FROM 2 COORDS (1 from DTO, 1 from same intervention)
+		private double distance(Double lat1_s, Double lon1_s, Double lat2_s, Double lon2_s) {
+			
+
+			if ((lat1_s.compareTo(lat2_s) == 0) && (lon1_s.compareTo(lon2_s)== 0)) {
+				return 0;
+			}
+			else {
+				double theta = lon1_s - lon2_s;
+				double dist = Math.sin(Math.toRadians(lat1_s)) * Math.sin(Math.toRadians(lat2_s)) + Math.cos(Math.toRadians(lat1_s)) * Math.cos(Math.toRadians(lat2_s)) * Math.cos(Math.toRadians(theta));
+				dist = Math.acos(dist);
+				dist = Math.toDegrees(dist);
+				dist = dist * 60 * 1.1515;
+				return (dist); //in mt
+			}
 		}
 
 }

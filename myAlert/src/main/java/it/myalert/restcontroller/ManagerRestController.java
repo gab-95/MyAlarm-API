@@ -61,16 +61,11 @@ public class ManagerRestController {
 	
 	//-----------------ADD MANAGER ----------------------------------------
 	@PostMapping(value="/addManager", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseBean post(@RequestBody ManagerDTO managerDTO) throws ManagerExeption {
+	public ManagerDTO post(@RequestBody ManagerDTO managerDTO) throws ManagerExeption {
 		
-		try {
-			Manager manager = managerService.addManager(managerService.convertToEntity(managerDTO));
-			return ResponseBean.okResponse(manager);
-		} catch (DataIntegrityViolationException e) {
-			return ResponseBean.koResponseBean(null, "Errore nell'inserimento");
-		} catch (Exception e) {
-			return ResponseBean.koResponseBean(null, "Errore non gestito");
-		} 
+		Manager manager = this.managerService.addManager(this.managerService.convertToEntity(managerDTO));
+		return this.managerService.convertToDTO(manager);
+		
 	}
 	
 	

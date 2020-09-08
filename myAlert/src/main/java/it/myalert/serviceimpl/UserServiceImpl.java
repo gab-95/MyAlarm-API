@@ -58,7 +58,7 @@ public class UserServiceImpl extends UserAdapter implements UserService  {
 
 	@Override
 	public User addUser(User user) {
-		
+		user.setIdUser(null);
 		return this.userRepository.save(user);
 	}
 

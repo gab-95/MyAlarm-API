@@ -27,6 +27,7 @@ import it.myalert.exeption.AgentExeption;
 import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.exeption.UserExeption;
+import it.myalert.service.NotificationService;
 import it.myalert.service.UserService;
 
 @RestController
@@ -36,9 +37,15 @@ public class UserRestController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	NotificationService notificationService;
+	
+	
 	//------------------GET ALL USERS------------------------------------
 	@GetMapping(value="/getAll", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<UserDTO> getAll(){
+		
+		this.notificationService.sendNotification("aaa", "message");
 		
 		List<User> list = userService.getAll();
 		List<UserDTO> listDTO = new ArrayList<UserDTO>();
