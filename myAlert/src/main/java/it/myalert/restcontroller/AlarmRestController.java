@@ -117,7 +117,7 @@ public class AlarmRestController {
 	public AlarmDTO post(@RequestBody AlarmDTO alarmDTO, @RequestParam("idType") int idType, @RequestParam("idCitizen") int idCitizen) throws TypeExeption, InterventionExeption, CitizenExeption, AlarmExeption {
 		
 		InterventionDTO interventionDTO = alarmDTO.getIntervention();	
-		int limit = 50; //mt
+		Double limit = 0.05; //Km
 		interventionDTO.setType(typeService.convertToDTO(typeService.getTypeById(idType)));
 		Intervention intervention = new Intervention();
 
@@ -135,7 +135,9 @@ public class AlarmRestController {
 				Intervention InterventionIT = listInterventionIT.next();
 				//calc dist from current intervention and listInterventionIT already saved
 				Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
-				if( distance > limit) {
+				Double distance2 = this.distance2(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon(), 'K');
+				System.out.print("\ndistance2= "+distance2 + " km");
+				if( distance2 > limit) {
 					System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ InterventionIT.getIdIntervention());
 					interventionDTO.setCount(1);
 					intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
@@ -202,5 +204,43 @@ public class AlarmRestController {
 			return (dist); //in mt
 		}
 	}
+	
+	
+	private double distance2(Double lat1, Double lon1, Double lat2, Double lon2, char unit) {
+		
+		if ((lat1.compareTo(lat2) == 0) && (lon1.compareTo(lon2)== 0)) {
+			return 0;
+		} else if(lat1 == null || lon1 == null) {
+			return 1000000;
+		} else{
+			double theta = lon1 - lon2;
+		      double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+		      dist = Math.acos(dist);
+		      dist = rad2deg(dist);
+		      dist = dist * 60 * 1.1515;
+		      if (unit == 'K') {
+		        dist = dist * 1.609344;
+		      } else if (unit == 'N') {
+		        dist = dist * 0.8684;
+		      }
+		      return (dist);
+		}
+	      
+	      
+	 }
+	    
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts decimal degrees to radians             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double deg2rad(double deg) {
+      return (deg * Math.PI / 180.0);
+    }
+    
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::  This function converts radians to decimal degrees             :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private double rad2deg(double rad) {
+      return (rad * 180.0 / Math.PI);
+    }
 	
 }
