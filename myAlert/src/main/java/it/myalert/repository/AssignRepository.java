@@ -22,4 +22,6 @@ public interface AssignRepository extends JpaRepository<Assign, Integer>{
 	public List<Assign> getAssignAgentAndOrderByField(@Param("idAgent")int idAgent, @Param("field")String field);
 	
 	public List<Assign> findByAgent_idAgentOrderByStartValidateDesc(int idAssign);
+	
+	public List<Assign> findByIntervention_idIntervention(int idIntervention);
 }

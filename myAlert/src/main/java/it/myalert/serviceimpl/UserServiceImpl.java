@@ -92,7 +92,7 @@ public class UserServiceImpl extends UserAdapter implements UserService  {
 	
 	@Override
 	public User getUserById(int idUser) throws UserExeption {
-		return this.userRepository.findById(idUser).orElseThrow(()-> new UserExeption("ERROR: No citizen found with id:"+ idUser));
+		return this.userRepository.findById(idUser).orElseThrow(()-> new UserExeption("ERROR: No user found with id:"+ idUser));
 	}
 	
 

@@ -1,6 +1,9 @@
 package it.myalert.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.nio.channels.NonWritableChannelException;
@@ -20,21 +23,21 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import it.myalert.entity.Manager;
 import it.myalert.entity.Type;
 import it.myalert.entity.User;
+import it.myalert.exeption.AlarmExeption;
 import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ManagerExeption;
 import it.myalert.exeption.TypeExeption;
+import it.myalert.serviceimpl.TypeServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class TypeServiceUnitTest {
 	
 	@Autowired
-	private TypeService typeService;
-	@Autowired
-	private ManagerService managerService;
+	private TypeServiceImpl typeServiceImpl;
 	
 	@Mock
-	private TypeService typeServiceMock;
+	private TypeServiceImpl typeServiceImplMock;
 	
 	private Type type;
 	private Manager manager;
@@ -43,31 +46,50 @@ public class TypeServiceUnitTest {
 	void setUpEnv() throws ManagerExeption {
 		
 		type = new Type();
-		type.setIdType(1);
+		
+		User user = new User();
+		Manager manager = new Manager();
+		
+		user = new User();
+		user.setIdUser(5);
+		user.setName("Gabriele");
+		user.setSurname("Test");
+		user.setEmail("test@uni.it");
+		user.setBirthDate(new Timestamp(new Date().getTime()));
+		user.setSex("M");
+		user.setAdress("AddressTest");
+		user.setCity("CityTest");
+		user.setCountry("ITA");
+		
+		manager.setIdManager(1);
+		manager.setStartDateTask(new Timestamp(new Date().getTime()));
+		manager.setUser(user);
+		
+		type.setIdType(3);
 		type.setName("Testo prova");
-		type.setManager(managerService.getById(3));
+		type.setManager(manager);
 	}
 	
 	@Test
 	void getAllTest() {
 		
-		assertThat(typeService.getAll()).isNotNull();
+		assertThat(this.typeServiceImpl.getAll()).isNotNull();
 	}
 	
 	
 	@Test
 	void getTypeById() throws TypeExeption {
 		
-		when(typeServiceMock.getTypeById(type.getIdType())).thenReturn(type);
+		Exception exc = assertThrows(TypeExeption.class, () -> this.typeServiceImpl.getTypeById(100));
+        assertTrue(exc.getMessage().contains("ERROR: No type found with id:"+ 100));
+		assertThat(this.typeServiceImpl.getTypeById(type.getIdType())).isNotNull();
 		
-		assertThat(type).isEqualTo(typeService.getTypeById(type.getIdType()));
 	}
 	
 	@Test
 	void addType() throws ManagerExeption {
 		
-		when(typeServiceMock.addType(type)).thenReturn(type);
-		
+		when(this.typeServiceImplMock.addType(type)).thenReturn(type);
 		assertThat(type.getIdType()).isNotNull();
 	}
 	
@@ -75,18 +97,18 @@ public class TypeServiceUnitTest {
 	void updateType() throws TypeExeption {
 		
 		type.setName("New type");
-		when(typeServiceMock.updateType(type)).thenReturn(type);
-		
+		when(this.typeServiceImplMock.updateType(type)).thenReturn(type);
 		assertThat(type.getName()).isNotEqualTo("Testo prova");
 	}
 	
 	@Test
 	void deleteType() throws TypeExeption {
 		
-		boolean status = true; 
-		when(typeServiceMock.deleteType(type.getIdType())).thenReturn(true);
-		
-		assertThat(status).isEqualTo(true);
+		Exception exc = assertThrows(TypeExeption.class, () -> {
+            this.typeServiceImpl.deleteType(100);
+            verify(this.typeServiceImplMock).deleteType(100);
+        });
+        assertTrue(exc.getMessage().contains("ERROR: No type found with id:"+ 100));
 		
 	}
 

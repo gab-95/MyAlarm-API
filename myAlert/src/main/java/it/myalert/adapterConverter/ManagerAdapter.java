@@ -1,6 +1,7 @@
 package it.myalert.adapterConverter;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +22,9 @@ public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
 			managerDTO.setUser(userAdapter.convertToDTO(manager.getUser()));
 		}
 		managerDTO.setStartDate_task(manager.getStartDateTask());
-		managerDTO.setEndDate_task(manager.getEndDateTask());
+		if(manager.getEndDateTask() != null) {
+			managerDTO.setEndDate_task(new Date(manager.getEndDateTask().getTime()));
+		}
 		return managerDTO;
 	}
 
@@ -32,7 +35,9 @@ public class ManagerAdapter implements Converter<ManagerDTO, Manager> {
 		manager.setIdManager(managerDTO.getIdManager());
 		manager.setUser(userAdapter.convertToEntity(managerDTO.getUser()));
 		manager.setStartDateTask(new Timestamp(managerDTO.getStartDate_task().getTime()));
-		manager.setEndDateTask(new Timestamp(managerDTO.getEndDate_task().getTime()));
+		if(managerDTO.getEndDate_task() != null) {
+			manager.setEndDateTask(new Timestamp(managerDTO.getEndDate_task().getTime()));
+		}
 		return manager;
 	}
 

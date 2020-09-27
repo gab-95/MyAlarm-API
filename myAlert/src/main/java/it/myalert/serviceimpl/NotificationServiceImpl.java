@@ -10,6 +10,7 @@ import it.myalert.service.NotificationService;
 
 @Service
 @Transactional
+@Deprecated
 public class NotificationServiceImpl implements NotificationService {
 
 	@Override

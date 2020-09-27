@@ -94,19 +94,24 @@ public class InterventionRestController {
 
 
 		//get intervention by status & type
-		Iterator<Intervention> listInterventionIT = interventionService.getAllInterventionByStatusAndType(idType, "signaled").iterator();
-		
-		while(listInterventionIT.hasNext()) {
-			Intervention InterventionIT = listInterventionIT.next();
-			//calc dist from current intervention and listInterventionIT already saved
-			Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
-			if( distance > limit) {
-				System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ InterventionIT.getIdIntervention());
-				intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
-			}else {
-				intervention = InterventionIT;
-			}
+		List<Intervention> list = interventionService.getAllInterventionByStatusAndType(idType, "signaled");
+		if(list.size() > 0) {
+			Iterator<Intervention> listInterventionIT = list.iterator();
+			while(listInterventionIT.hasNext()) {
+				Intervention InterventionIT = listInterventionIT.next();
+				//calc dist from current intervention and listInterventionIT already saved
+				Double distance = this.distance(interventionDTO.getLat(), interventionDTO.getLon(), InterventionIT.getLat(), InterventionIT.getLon());
+				System.out.print("dis"+distance);
+				if( distance > limit) {
+					System.out.print("distace > 50 mt: "+ distance+ "for intervention with ID "+ InterventionIT.getIdIntervention());
+					intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
+				}else {
+					intervention = InterventionIT;
+				}
 
+			}
+		}else {
+			intervention = interventionService.addIntervention(interventionService.convertToEntity(interventionDTO));
 		}
 		//add new alarm to DB
 		Citizen citizen = citizenService.getCitizenById(idCitizen);

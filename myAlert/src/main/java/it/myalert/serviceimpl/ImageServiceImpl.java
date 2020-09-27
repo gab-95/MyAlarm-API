@@ -56,7 +56,7 @@ public class ImageServiceImpl extends ImageAdapter implements ImageService {
 	@Override
 	public Boolean deleteImage(int idImage) throws ImageExeption {
 		
-		Image image = this.imageRepository.findById(idImage).orElseThrow(()-> new ImageExeption("ERROR: No type found with id:"+ idImage));
+		Image image = this.imageRepository.findById(idImage).orElseThrow(()-> new ImageExeption("ERROR: No image found with id:"+ idImage));
 		if(image != null) {
 			this.imageRepository.delete(image);
 			return true;

@@ -1,13 +1,16 @@
 package it.myalert.restcontroller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +26,7 @@ import it.myalert.DTO.ResponseBean;
 import it.myalert.entity.Agent;
 import it.myalert.exeption.AgentExeption;
 import it.myalert.exeption.ManagerExeption;
+import it.myalert.exeption.TypeExeption;
 import it.myalert.service.AgentService;
 import it.myalert.service.ManagerService;
 
@@ -70,13 +74,16 @@ public class AgentRestController {
 		public List<AgentDTO> getAgentByPosition(@RequestParam("lat") double lat, @RequestParam("lon") double lon, @RequestParam("distance") int distance) throws AgentExeption{
 			
 			List<AgentDTO> listDTO = new ArrayList<AgentDTO>();
-			
+			Double dis = Double.valueOf(distance);
 			Iterator<Agent> agentIT = this.agentService.getAll().iterator();
 			while(agentIT.hasNext()) {
 				Agent agent = agentIT.next();
 				//calc distance between agent position and coords of intervention passed as argument
 				Double distanceCalc = this.distance(agent.getLat(), agent.getLon(), lat, lon);
-				if(distanceCalc < distance) {
+				Double distance2 = this.distance2(agent.getLat(), agent.getLon(), lat, lon, 'K');
+				System.out.print("\n\ndistance= "+distance);
+				System.out.print("\ndistance2= "+distance2);
+				if(distance2 < dis) {
 					//add agent to list
 					listDTO.add(this.agentService.convertToDTO(agent));
 				}
@@ -89,32 +96,38 @@ public class AgentRestController {
 		
 		//-----------------ADD AGENT FROM idManager----------------------------------------
 		@PostMapping(value="/addAgent/{idManager}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseBean post(@RequestBody AgentDTO agentDTO, @PathVariable("idManager") int idManager) throws AgentExeption, ManagerExeption {
+		public AgentDTO post(@RequestBody AgentDTO agentDTO, @PathVariable("idManager") int idManager) throws AgentExeption, ManagerExeption {
 			ManagerDTO managerDTO = managerService.convertToDTO(managerService.getById(idManager));
 			agentDTO.setManagerDTO(managerDTO);
 			
-			try {
-				Agent agent = agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
-				return ResponseBean.okResponse(agent);
-			} catch (DataIntegrityViolationException e) {
-				return ResponseBean.koResponseBean(null, "Errore nell'inserimento");
-			}catch (Exception e) {
-				return ResponseBean.koResponseBean(null, "Errore non gestito");
-			} 
+			Agent agent = this.agentService.addAgent(agentService.convertToEntity(agentDTO), idManager);
+			return this.agentService.convertToDTO(agent);
+
 		}
 		
 		//-----------------UPDATE POSITION AGENT ----------------------------------------
 		@PutMapping(value="/updatePosition/{idAgent}", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		public AgentDTO updatePosition(@PathVariable("idAgent") int idAgent, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws AgentExeption {
-				Agent agent = agentService.updatePosition(lat, lon, idAgent);
-				return agentService.convertToDTO(agent);
+				Agent agent = this.agentService.updatePosition(lat, lon, idAgent);
+				return this.agentService.convertToDTO(agent);
 		}
 		
 		//-----------------UPDATE  AGENT ----------------------------------------
 		@PutMapping(value="/updateAgent/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
 		public AgentDTO updateAgent(@RequestBody AgentDTO agentDTO, @PathVariable("idAgent") int idAgent) throws AgentExeption {
 			//agentDTO.setManagerDTO(this.managerService.convertToDTO(this.agentService.getAgentById(idAgent).getManager())); 
-			return agentService.convertToDTO(agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent));
+			return this.agentService.convertToDTO(agentService.updateAgent(agentService.convertToEntity(agentDTO), idAgent));
+		}
+		
+		//-----------------DELETE  AGENT ----------------------------------------
+		@DeleteMapping(value="/deleteAgent/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public AgentDTO deleteType(@PathVariable("idAgent") int idAgent) throws AgentExeption {	
+			
+			Agent agent = this.agentService.getAgentById(idAgent);
+			agent.setEndDateTask(new Timestamp(new Date().getTime()));
+			
+			return this.agentService.convertToDTO(this.agentService.updateAgent(agent, idAgent));
+			
 		}
 		
 		
@@ -125,6 +138,8 @@ public class AgentRestController {
 
 			if ((lat1_s.compareTo(lat2_s) == 0) && (lon1_s.compareTo(lon2_s)== 0)) {
 				return 0;
+			}else if(lat1_s == null || lon1_s == null) {
+				return 1000000;
 			}
 			else {
 				double theta = lon1_s - lon2_s;
@@ -135,5 +150,43 @@ public class AgentRestController {
 				return (dist); //in mt
 			}
 		}
+		
+		
+		private double distance2(Double lat1, Double lon1, Double lat2, Double lon2, char unit) {
+			
+			if ((lat1.compareTo(lat2) == 0) && (lon1.compareTo(lon2)== 0)) {
+				return 0;
+			} else if(lat1 == null || lon1 == null) {
+				return 1000000;
+			} else{
+				double theta = lon1 - lon2;
+			      double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+			      dist = Math.acos(dist);
+			      dist = rad2deg(dist);
+			      dist = dist * 60 * 1.1515;
+			      if (unit == 'K') {
+			        dist = dist * 1.609344;
+			      } else if (unit == 'N') {
+			        dist = dist * 0.8684;
+			      }
+			      return (dist);
+			}
+		      
+		      
+		 }
+		    
+		    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+		    /*::  This function converts decimal degrees to radians             :*/
+		    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+		    private double deg2rad(double deg) {
+		      return (deg * Math.PI / 180.0);
+		    }
+		    
+		    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+		    /*::  This function converts radians to decimal degrees             :*/
+		    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+		    private double rad2deg(double rad) {
+		      return (rad * 180.0 / Math.PI);
+		    }
 
 }

@@ -38,6 +38,7 @@ public class AgentServiceImpl extends AgentAdapter implements AgentService {
 	public Agent addAgent(Agent agent, int idManager) throws AgentExeption {
 		User user = agent.getUser();
 		user.setIdUser(null);
+		agent.setIdAgent(null);
 		//User nuovoUser = this.userRepository.save(user);
 		//this.agentRepository.addAgent(agent, idManager, nuovoUser.getIdUser());
 		//agent.setUser(nuovoUser);		

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,15 +38,12 @@ public class UserRestController {
 	@Autowired
 	UserService userService;
 	
-	@Autowired
-	NotificationService notificationService;
 	
 	
 	//------------------GET ALL USERS------------------------------------
 	@GetMapping(value="/getAll", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<UserDTO> getAll(){
 		
-		this.notificationService.sendNotification("aaa", "message");
 		
 		List<User> list = userService.getAll();
 		List<UserDTO> listDTO = new ArrayList<UserDTO>();

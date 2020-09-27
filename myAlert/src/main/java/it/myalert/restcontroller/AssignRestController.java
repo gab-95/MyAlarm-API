@@ -77,6 +77,25 @@ public class AssignRestController {
 		
 	}
 	
+	//-----------------GET ASSIGN BY idIntervention ----------------------------------------
+	@GetMapping(value="/getAssignByIdIntervention/{idIntervention}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AssignDTO> getAssignByIdIntervention(@PathVariable("idIntervention") int idIntervention) throws InterventionExeption{
+		
+		Iterator<Assign> listIT = this.assignService.getAssignByIdIntervention(idIntervention).iterator();
+		List<AssignDTO> listDTO = new ArrayList<AssignDTO>();
+		
+		while(listIT.hasNext()) {
+			listDTO.add(this.assignService.convertToDTO(listIT.next()));
+		}
+		
+		if(listDTO.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return listDTO;
+		
+	}
+	
 	//-----------------GET ALL ASSIGN BY idAgent ----------------------------------------
 	@GetMapping(value="/getAllAssignByIdAgent/{idAgent}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AssignDTO> getAllAlarmByIdIntervention(@PathVariable("idAgent") int idAgent) throws AgentExeption{
@@ -117,17 +136,19 @@ public class AssignRestController {
 	
 	//-----------------ASSIGN AGENT TO INTERVENTION ----------------------------------------
 	@PostMapping(value="/assignAgentToIntervention/{idManager}", consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
-	public AssignDTO getAllAlarmByIdIntervention(@RequestBody AssignDTO assignDTO,@PathVariable("idManager") int idManager ,@RequestParam("idAgent") int idAgent, @RequestParam("idIntervention") int idIntervention) throws AgentExeption, ManagerExeption, InterventionExeption{
+	public AssignDTO post(@PathVariable("idManager") int idManager ,@RequestParam("idAgent") int idAgent, @RequestParam("idIntervention") int idIntervention) throws AgentExeption, ManagerExeption, InterventionExeption{
 		
 		ManagerDTO managerDTO = this.managerService.convertToDTO(this.managerService.getById(idManager));
 		AgentDTO agentDTO = this.agentService.convertToDTO(this.agentService.getAgentById(idAgent));
 		InterventionDTO interventionDTO = this.interventionService.convertToDTO(this.interventionService.getById(idIntervention));
+		AssignDTO assignDTO = new AssignDTO();
 		assignDTO.setManager(managerDTO);
 		assignDTO.setAgent(agentDTO);
 		interventionDTO.setStatus("assigned");
-		interventionDTO.setStartDate(new Date());
 		assignDTO.setIntervention(interventionDTO);
 		assignDTO.setStartValidate(new Date());
+		assignDTO.setConfirm(false);
+		assignDTO.setHasWritten(false);
 		Assign assign = this.assignService.convertToEntity(assignDTO);
 		//update intervention status & start date
 		this.interventionService.updateIntervention(this.interventionService.convertToEntity(interventionDTO));
@@ -139,7 +160,7 @@ public class AssignRestController {
 	
 	//-----------------UPDATE  ASSIGN ----------------------------------------
 	@PutMapping(value="/updateAssign/{idAssign}", consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
-	public AssignDTO updateIntervention(@PathVariable("idAssign") int idIntervention, @RequestBody AssignDTO assignDTO) throws AssignExeption, InterventionExeption {	
+	public AssignDTO updateAssign(@PathVariable("idAssign") int idAssign, @RequestBody AssignDTO assignDTO) throws AssignExeption, InterventionExeption {	
 
 		Intervention intervention = this.interventionService.updateIntervention(this.interventionService.convertToEntity(assignDTO.getIntervention()));
 		Assign assign = this.assignService.convertToEntity(assignDTO);

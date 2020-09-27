@@ -1,9 +1,7 @@
 package it.myalert.restcontroller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,25 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.myalert.DTO.AlarmDTO;
 import it.myalert.DTO.ImageDTO;
 import it.myalert.DTO.InterventionDTO;
-import it.myalert.DTO.ManagerDTO;
 import it.myalert.DTO.ResponseBean;
-import it.myalert.DTO.TypeDTO;
 import it.myalert.DTO.UserDTO;
-import it.myalert.entity.Alarm;
-import it.myalert.entity.Citizen;
 import it.myalert.entity.Image;
-import it.myalert.entity.Intervention;
-import it.myalert.entity.Type;
-import it.myalert.entity.User;
-import it.myalert.exeption.AlarmExeption;
-import it.myalert.exeption.CitizenExeption;
 import it.myalert.exeption.ImageExeption;
 import it.myalert.exeption.InterventionExeption;
-import it.myalert.exeption.ManagerExeption;
-import it.myalert.exeption.TypeExeption;
 import it.myalert.exeption.UserExeption;
 import it.myalert.service.ImageService;
 import it.myalert.service.InterventionService;

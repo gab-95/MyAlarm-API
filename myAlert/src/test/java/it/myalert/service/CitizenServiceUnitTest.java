@@ -1,6 +1,8 @@
 package it.myalert.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
@@ -16,17 +18,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import it.myalert.entity.Citizen;
 import it.myalert.entity.User;
+import it.myalert.exeption.AssignExeption;
 import it.myalert.exeption.CitizenExeption;
+import it.myalert.serviceimpl.CitizenServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class CitizenServiceUnitTest {
 
 	@Autowired
-	private CitizenService citizenService;
+	private CitizenServiceImpl citizenServiceImpl;
 	
 	@Mock
-	private CitizenService citizenServiceMock;
+	private CitizenServiceImpl citizenServiceImplMock;
 	
 	private Citizen citizen;
 	private User user;
@@ -37,8 +41,7 @@ public class CitizenServiceUnitTest {
 		citizen = new Citizen();
 		user = new User();
 		
-		
-		user = new User();
+	
 		user.setIdUser(5);
 		user.setName("Gabriele");
 		user.setSurname("Test");
@@ -58,34 +61,31 @@ public class CitizenServiceUnitTest {
 	
 	@Test
 	void getAllTest() {
-		assertThat(citizenService.getAll()).isNotNull();
+		assertThat(this.citizenServiceImpl.getAll()).isNotNull();
 	}
 	
 	
 	@Test
 	void getCitizenById() throws CitizenExeption {
 		
-		
-		when(citizenServiceMock.getCitizenById(citizen.getIdCitizen())).thenReturn(citizen);
-		
-		assertThat(citizen).isEqualTo(citizenService.getCitizenById(citizen.getIdCitizen()));
-		
+		Exception exc = assertThrows(CitizenExeption.class, () -> this.citizenServiceImpl.getCitizenById(100));
+        assertTrue(exc.getMessage().contains("ERROR: No citizen found with id:"+ 100));
+        assertThat(this.citizenServiceImpl.getCitizenById(6)).isNotNull();
 	}
 	
 	@Test
 	void addCitizen() throws CitizenExeption {
 		
-		when(citizenServiceMock.addCitizen(citizen)).thenReturn(citizen);
-		
-		assertThat(citizen.getIdCitizen()).isNotNull();
+		when(this.citizenServiceImplMock.addCitizen(citizen)).thenReturn(citizen);
+		int id = this.citizenServiceImplMock.addCitizen(citizen).getIdCitizen();
+		assertThat(id).isEqualTo(1);
 	}
 	
 	@Test
 	void updateCitizen() throws CitizenExeption {
 		
 		citizen.getUser().setAdress("address test2");
-		when(citizenServiceMock.addCitizen(citizen)).thenReturn(citizen);
-		
+		when(this.citizenServiceImplMock.updateCitizen(citizen)).thenReturn(citizen);
 		assertThat(citizen.getUser().getAdress()).isNotEqualTo("AddressTest");
 	}
 	
@@ -97,8 +97,7 @@ public class CitizenServiceUnitTest {
 		double lat_old = citizen.getLat();
 		double lon_old = citizen.getLon();
 		
-		when(citizenServiceMock.updatePosition(lat_new, lon_new, citizen.getIdCitizen())).thenReturn(citizen);
-		
+		when(this.citizenServiceImplMock.updatePosition(lat_new, lon_new, citizen.getIdCitizen())).thenReturn(citizen);
 		assertThat(citizen.getLon()).isNotEqualTo(lon_new);
 		
 	}

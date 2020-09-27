@@ -39,6 +39,12 @@ public class AssignServiceImpl extends AssignAdapter implements AssignService{
 		
 		return this.assignRepository.findByAgent_idAgent(idAgent);
 	}
+	
+	@Override
+	public List<Assign> getAssignByIdIntervention(int idIntervention) throws InterventionExeption {
+		
+		return this.assignRepository.findByIntervention_idIntervention(idIntervention);
+	}
 
 	@Override
 	public Assign assignAgentToIntervention(Assign assign) {
@@ -57,5 +63,7 @@ public class AssignServiceImpl extends AssignAdapter implements AssignService{
 		List<Assign> list = this.assignRepository.findByAgent_idAgentOrderByStartValidateDesc(idAgent);
 		return list;
 	}
+
+	
 
 }
