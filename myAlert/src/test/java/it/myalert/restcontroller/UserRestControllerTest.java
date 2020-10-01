@@ -21,8 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.security.test.context.support.WithMockUser;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.myalert.DTO.UserDTO;
@@ -62,7 +60,7 @@ public class UserRestControllerTest {
 	}
 	
 	
-	@WithMockUser(username="", password="")
+	
 	@Test
 	public void getAllTest() {
 		try {
@@ -72,7 +70,7 @@ public class UserRestControllerTest {
 		}
 	}
 	
-	@WithMockUser(username="", password="")
+
 	@Test
 	public void getByIdUserTest() throws Exception {
 
@@ -82,7 +80,7 @@ public class UserRestControllerTest {
 	      		.andExpect(status().isOk());
 	}
 	
-	@WithMockUser(username="", password="")
+
 	@Test
 	public void getByEmailTest() throws Exception {
 
